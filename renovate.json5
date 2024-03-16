@@ -23,12 +23,8 @@
   ],
   "packageRules": [
     {
-      "groupName": "all patch",
-      "matchUpdateTypes": ["patch"]
-    },
-    {
       "groupName": "all minor",
-      "matchUpdateTypes": ["minor"]
+      "matchUpdateTypes": ["minor","patch"]
     },
     {
       "groupName": "all major",
