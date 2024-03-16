@@ -27,33 +27,11 @@
       "matchUpdateTypes": ["patch"]
     },
     {
-      "groupName": "helm chart",
-      "matchDatasources": "helm",
+      "groupName": "all minor",
       "matchUpdateTypes": ["minor"]
     },
     {
-      "groupName": "helm chart",
-      "matchDatasources": "helm",
-      "matchUpdateTypes": ["major"]
-    },
-    {
-      "groupName": "github-releases",
-      "matchDatasources": "github-releases",
-      "matchUpdateTypes": ["minor"]
-    },
-    {
-      "groupName": "github-releases",
-      "matchDatasources": "github-releases",
-      "matchUpdateTypes": ["major"]
-    },
-    {
-      "groupName": "docker",
-      "matchDatasources": "docker",
-      "matchUpdateTypes": ["minor"]
-    },
-    {
-      "groupName": "docker",
-      "matchDatasources": "docker",
+      "groupName": "all major",
       "matchUpdateTypes": ["major"]
     }
   ]
