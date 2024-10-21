@@ -4,6 +4,9 @@
     "config:base",
     ":dependencyDashboard"
   ],
+  "kubernetes": {
+    "fileMatch": ["deployment\\.ya?ml$"]
+  },
   "regexManagers": [
     {
       "fileMatch": ["^[^\/\\s]+\/[^\/\\s]+\/description\\.yaml"],
