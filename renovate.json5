@@ -26,6 +26,9 @@
   ],
   "packageRules": [
     {
+      "reviewers": ["trowaflo"]
+    },
+    {
       "groupName": "all minor",
       "matchUpdateTypes": ["minor","patch"]
     },
