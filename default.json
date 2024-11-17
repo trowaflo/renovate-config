@@ -3,7 +3,7 @@
   "extends": [
     "config:base",
     ":dependencyDashboard",
-    "local>renovate:git-ops.json5"
+    "github>trowaflo/renovate:git-ops.json5"
   ],
   "packageRules": [
     {
