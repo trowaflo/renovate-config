@@ -1,9 +1,4 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":dependencyDashboard"
-  ],
   "kubernetes": {
     "fileMatch": ["deployment\\.ya?ml$"]
   },
@@ -22,19 +17,6 @@
         "repoName:\\s+(?<depName>.*)\\s+tag:\\s+(?<currentValue>.*)"
       ],
       "datasourceTemplate": "github-releases"
-    }
-  ],
-  "packageRules": [
-    {
-      "reviewers": ["trowaflo"]
-    },
-    {
-      "groupName": "all minor",
-      "matchUpdateTypes": ["minor","patch"]
-    },
-    {
-      "groupName": "all major",
-      "matchUpdateTypes": ["major"]
     }
   ]
 }

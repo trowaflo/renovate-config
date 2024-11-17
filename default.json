@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":dependencyDashboard",
+    "git-ops"
+  ],
+  "packageRules": [
+    {
+      "reviewers": ["trowaflo"]
+    },
+    {
+      "groupName": "all minor",
+      "matchUpdateTypes": ["minor","patch"]
+    },
+    {
+      "groupName": "all major",
+      "matchUpdateTypes": ["major"]
+    }
+  ]
+}
