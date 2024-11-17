@@ -3,7 +3,7 @@
   "extends": [
     "config:base",
     ":dependencyDashboard",
-    "local>renovate:git-ops.json"
+    "local>renovate:git-ops.json5"
   ],
   "packageRules": [
     {
