@@ -5,10 +5,8 @@
     ":dependencyDashboard",
     "github>trowaflo/renovate:git-ops.json5"
   ],
+  "reviewers": ["trowaflo"],
   "packageRules": [
-    {
-      "reviewers": ["trowaflo"]
-    },
     {
       "groupName": "all minor",
       "matchUpdateTypes": ["minor","patch"]
