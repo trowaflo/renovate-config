@@ -5,6 +5,11 @@
     ":dependencyDashboard",
     "github>trowaflo/renovate:git-ops.json5"
   ],
+
+  "pre-commit": {
+    "enabled": true
+  },
+
   "reviewers": ["trowaflo"],
   "packageRules": [
     {
