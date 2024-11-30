@@ -5,7 +5,7 @@
     ":dependencyDashboard",
     "github>trowaflo/renovate:git-ops.json5"
   ],
-
+  "onboardingRebaseCheckbox": true,
   "onboardingConfig": { 
     "extends": [
       "github>trowaflo/renovate"
