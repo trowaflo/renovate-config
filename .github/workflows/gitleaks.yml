@@ -15,7 +15,6 @@ jobs:
         with:
           fetch-depth: 0
 
-
       - name: Gitleaks Action
         uses: gitleaks/gitleaks-action@v2
         env:
