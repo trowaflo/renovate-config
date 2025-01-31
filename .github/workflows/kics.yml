@@ -20,7 +20,7 @@ jobs:
       uses: checkmarx/kics-github-action@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        path: "terraform"
+        path: "."
         ignore_on_exit: results
         enable_annotations: true
         enable_comments: true
