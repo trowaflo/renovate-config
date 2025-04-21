@@ -8,17 +8,5 @@
 
   "pre-commit": {
     "enabled": true
-  },
-
-  "reviewers": ["trowaflo"],
-  "packageRules": [
-    {
-      "groupName": "all minor",
-      "matchUpdateTypes": ["minor","patch"]
-    },
-    {
-      "groupName": "all major",
-      "matchUpdateTypes": ["major"]
-    }
-  ]
+  }
 }
