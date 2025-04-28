@@ -9,4 +9,11 @@
   "pre-commit": {
     "enabled": true
   }
+  "packageRules": [
+    {
+      "matchPackageNames": ["ansible/ansible-lint"],
+      "matchManagers": ["pre-commit"],
+      "automerge": true
+    }
+  ]
 }
