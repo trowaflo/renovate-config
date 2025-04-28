@@ -11,7 +11,7 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": ["ansible-lint"],
+      "matchPackageNames": ["ansible/ansible-lint"],
       "matchManagers": ["pre-commit"],
       "automerge": true,
       "labels": ["pre-commit", "ansible-lint"]
