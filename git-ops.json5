@@ -4,7 +4,7 @@
   },
   "regexManagers": [
     {
-      "fileMatch": ["^[^\/\\s]+\/[^\/\\s]+\/description\\.yaml"],
+      "fileMatch": ["(^|.*\/)(description\\.yaml)$"],
       "matchStrings": ["ccm:\\s+repoURL:\\s+(?<registryUrl>.*)\\s+targetRevision:\\s+(?<currentValue>.*)\\s+chart:\\s+(?<depName>.*)"],
       "datasourceTemplate": "helm"
     },
