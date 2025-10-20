@@ -20,14 +20,18 @@
     }
   ],
   "reviewers": ["trowaflo"],
-  // "packageRules": [
-  //   {
-  //     "groupName": "all minor",
-  //     "matchUpdateTypes": ["minor","patch"]
-  //   },
-  //   {
-  //     "groupName": "all major",
-  //     "matchUpdateTypes": ["major"]
-  //   }
-  // ]
+  "packageRules": [
+    {
+      "groupName": "all patch",
+      "matchUpdateTypes": ["patch"]
+    },
+    {
+      "groupName": "all minor",
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "groupName": "all major",
+      "matchUpdateTypes": ["major"]
+    }
+  ]
 }
