@@ -31,16 +31,13 @@
   "reviewers": ["trowaflo"],
   "packageRules": [
     {
-      "groupName": "all patch",
-      "matchUpdateTypes": ["patch"]
+      "groupName": "Minor and Patch Updates",
+      "matchUpdateTypes": ["patch", "minor"]
     },
     {
-      "groupName": "all minor",
-      "matchUpdateTypes": ["minor"]
-    },
-    {
-      "groupName": "all major",
-      "matchUpdateTypes": ["major"]
+      "matchUpdateTypes": ["major"],
+      "labels": ["major"],
+      "automerge": false
     }
   ]
 }
