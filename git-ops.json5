@@ -1,4 +1,5 @@
 {
+  "platformAutomerge": false,
   "kubernetes": {
     "fileMatch": ["deployment\\.ya?ml$"]
   },
