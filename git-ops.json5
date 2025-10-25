@@ -38,6 +38,11 @@
       "matchUpdateTypes": ["major"],
       "labels": ["major"],
       "automerge": false
+    },
+    {
+      "groupName": "Automerge GitHub Actions",
+      "matchPackageNames": ["actions/checkout"],
+      "automerge": true
     }
   ]
 }
