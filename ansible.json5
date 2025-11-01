@@ -19,16 +19,15 @@
       "groupName": "AUTOMERGE - Ansible Galaxy Patch and Minor Updates",
       "commitMessageAction": "chore(ansible-galaxy):",
       "commitMessageTopic": "{{depName}}",
-      // "automerge": true
+      "automerge": true
     },
     {
       "matchManagers": ["ansible-galaxy"],
       "matchUpdateTypes": ["major"],
       "labels": ["ansible-galaxy", "breaking"],
       "groupName": "BREAKING - Ansible Galaxy Major Updates",
-      "semanticCommits": "enabled",
-      "semanticCommitType": "feat",
-      "semanticCommitScope": "ansible-galaxy",
+      "commitMessageAction": "chore(ansible-galaxy)!:",
+      "commitMessageTopic": "{{depName}}",
       "automerge": false
     }
   ]

@@ -4,7 +4,9 @@
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["patch", "minor"],
       "matchPackageNames": ["actions/checkout"],
-      "groupName": "Automerge GitHub Actions",
+      "groupName": "AUTOMERGE - GitHub Actions",
+      "commitMessageAction": "ci(github-actions):",
+      "commitMessageTopic": "{{depName}}",
       "automerge": true
     }
   ]
