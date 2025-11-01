@@ -18,6 +18,7 @@
       "labels": ["ansible-galaxy", "automerge"],
       "groupName": "AUTOMERGE - Ansible Galaxy Patch and Minor Updates",
       "commitMessageAction": "chore(ansible-galaxy):",
+      "commitMessageTopic": "{{depName}}",
       // "automerge": true
     },
     {
