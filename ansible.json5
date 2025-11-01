@@ -17,7 +17,7 @@
       "matchUpdateTypes": ["patch", "minor"],
       "labels": ["ansible-galaxy", "automerge"],
       "groupName": "AUTOMERGE - Ansible Galaxy Patch and Minor Updates",
-      "commitMessagePrefix": "chore(ansible-galaxy)",
+      "commitMessageAction": "chore(ansible-galaxy):",
       // "automerge": true
     },
     {
