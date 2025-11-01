@@ -3,18 +3,20 @@
   "extends": [
     "config:recommended",
     ":dependencyDashboard",
-    "github>trowaflo/renovate:git-ops.json5"
+    "local>trowaflo/renovate-config:git-ops.json5",
+    "local>trowaflo/renovate-config:ci.json5",
+    "local>trowaflo/renovate-config:no_category.json5"
   ],
-
-  "pre-commit": {
-    "enabled": true
-  },
+  "reviewers": ["trowaflo"],
   "packageRules": [
     {
-      "matchPackageNames": ["ansible/ansible-lint"],
-      "matchManagers": ["pre-commit"],
-      "labels": ["pre-commit", "ansible-lint"],
-      "automerge": true
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "Minor and Patch Updates"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["major"],
+      "automerge": false
     }
   ]
 }

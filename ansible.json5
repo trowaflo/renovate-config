@@ -1,0 +1,28 @@
+{
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^ansible\/group_vars\/.*\\.yml",
+        "^vars\/main\\.yml"
+      ],
+      "matchStrings": [
+        "repoName:\\s+(?<depName>.*)\\s+tag:\\s+(?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "github-releases"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["ansible-galaxy"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "Automerge - Ansible Galaxy roles",
+      "automerge": true
+    },
+    {
+      "matchManagers": ["ansible-galaxy"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "BREAKING - Ansible Galaxy roles",
+      "automerge": false
+    }
+  ]
+}

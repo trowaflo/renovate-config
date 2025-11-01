@@ -17,33 +17,6 @@
       "fileMatch": ["(^|.*\/)(description\\.yaml)$"],
       "matchStrings": ["ccm:\\s+repoURL:\\s+(?<registryUrl>[^\\s]+)\\s+targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+chart:\\s+(?<depName>[^\\s]+)\\s+type:\\s+helm"],
       "datasourceTemplate": "helm"
-    },
-    {
-      "fileMatch": [
-        "^ansible\/group_vars\/.*\\.yml",
-        "^vars\/main\\.yml"
-      ],
-      "matchStrings": [
-        "repoName:\\s+(?<depName>.*)\\s+tag:\\s+(?<currentValue>.*)"
-      ],
-      "datasourceTemplate": "github-releases"
-    }
-  ],
-  "reviewers": ["trowaflo"],
-  "packageRules": [
-    {
-      "groupName": "Minor and Patch Updates",
-      "matchUpdateTypes": ["patch", "minor"]
-    },
-    {
-      "matchUpdateTypes": ["major"],
-      "labels": ["major"],
-      "automerge": false
-    },
-    {
-      "groupName": "Automerge GitHub Actions",
-      "matchPackageNames": ["actions/checkout"],
-      "automerge": true
     }
   ]
 }
