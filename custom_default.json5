@@ -1,0 +1,15 @@
+{
+
+  "reviewers": ["trowaflo"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "Minor and Patch Updates"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["major"],
+      "automerge": false
+    }
+  ]
+}
