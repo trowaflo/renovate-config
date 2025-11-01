@@ -15,13 +15,15 @@
     {
       "matchManagers": ["ansible-galaxy"],
       "matchUpdateTypes": ["patch", "minor"],
-      "groupName": "Automerge - Ansible Galaxy roles",
+      "labels": ["ansible-galaxy", "automerge"],
+      "semanticCommits": "enabled",
       "automerge": true
     },
     {
       "matchManagers": ["ansible-galaxy"],
       "matchUpdateTypes": ["major"],
-      "groupName": "BREAKING - Ansible Galaxy roles",
+      "labels": ["ansible-galaxy", "breaking"],
+      "semanticCommits": "enabled",
       "automerge": false
     }
   ]
