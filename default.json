@@ -3,10 +3,10 @@
   "extends": [
     "config:recommended",
     ":dependencyDashboard",
-    "local>trowaflo/renovate-config:custom_default.json5",
     "local>trowaflo/renovate-config:ansible.json5",
     "local>trowaflo/renovate-config:git-ops.json5",
     "local>trowaflo/renovate-config:ci.json5",
     "local>trowaflo/renovate-config:no_category.json5"
-  ]
+  ],
+  "reviewers": ["trowaflo"]
 }
