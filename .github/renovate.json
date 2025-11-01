@@ -1,6 +1,0 @@
-{
-  "onboardingRebaseCheckbox": true,
-  "onboardingConfig": {
-    "extends": ["github>trowaflo/renovate-config"]
-  }
-}

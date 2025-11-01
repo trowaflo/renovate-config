@@ -11,5 +11,9 @@
   "schedule": [
     "* * * * 5"
   ],
-  "reviewers": ["trowaflo"]
+  "reviewers": ["trowaflo"],
+  "onboardingRebaseCheckbox": true,
+  "onboardingConfig": {
+    "extends": ["local>trowaflo/renovate-config"]
+  }
 }
