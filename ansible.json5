@@ -18,6 +18,8 @@
       "labels": ["ansible-galaxy", "automerge"],
       "groupName": "AUTOMERGE - Ansible Galaxy Patch and Minor Updates",
       "semanticCommits": "enabled",
+      "semanticCommitType": "{{updateType}}",
+      "semanticCommitScope": "ansible-galaxy",
       // "automerge": true
     },
     {
@@ -26,6 +28,8 @@
       "labels": ["ansible-galaxy", "breaking"],
       "groupName": "BREAKING - Ansible Galaxy Major Updates",
       "semanticCommits": "enabled",
+      "semanticCommitType": "{{updateType}}",
+      "semanticCommitScope": "ansible-galaxy",
       "automerge": false
     }
   ]
