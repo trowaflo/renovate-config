@@ -32,7 +32,7 @@
       "commitMessageTopic": "{{depName}}",
       "automerge": false
     },
-    //
+    // Ansible vars Patch and Minor Updates
     {
       "matchManagers": ["regex"],
       "matchUpdateTypes": ["patch", "minor"],
@@ -47,6 +47,7 @@
       "commitMessageTopic": "{{depName}}",
       "automerge": true
     },
+    // Ansible vars Major Updates
     {
       "matchManagers": ["regex"],
       "matchUpdateTypes": ["major"],
