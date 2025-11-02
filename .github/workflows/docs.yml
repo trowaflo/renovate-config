@@ -86,7 +86,7 @@ jobs:
           echo "*Documentation auto-generated on $(date)*" >> README.md
 
       - name: Auto Commit Documentation
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "docs: 📚 auto-update documentation [skip ci]"
           file_pattern: "README.md"
