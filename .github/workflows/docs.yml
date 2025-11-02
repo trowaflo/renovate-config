@@ -1,14 +1,15 @@
-name: Generate Documentation
+name: Auto Generate Documentation
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths: ['*.json', '*.json5']
   pull_request:
+    paths: ['*.json', '*.json5']
   workflow_dispatch:
 
 jobs:
-  generate-docs:
+  docs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -18,108 +19,75 @@ jobs:
         uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: '20'
-
-      - name: Generate README
+      - name: Create Documentation
         run: |
+          # Create a comprehensive README
           cat > README.md << 'EOF'
-          # Renovate Configuration Presets
+          # 🔧 Renovate Configuration Presets
 
           This repository contains shared Renovate configuration presets for consistent dependency management across projects.
 
-          ## Available Presets
-
-          ### 🔧 Main Configuration
-          - **`default.json`** - Complete configuration with all presets included
-          - **`renovate.json`** - Basic configuration extending the default preset
-
-          ### 📦 Specialized Presets
-
-          #### Ansible (`ansible.json5`)
-          - Ansible Galaxy collections updates
-          - Custom regex manager for Ansible vars files
-          - Separate handling for patch/minor vs major updates
-
-          #### CI/CD (`ci.json5`)
-          - GitHub Actions updates
-          - Automatic merging for patch/minor versions
-          - Manual review for major versions
-
-          #### Docker (`docker.json5`)
-          - Docker Compose service updates
-          - Grouped updates by severity
-          - Automated patch/minor updates
-
-          #### GitOps (`git-ops.json5`)
-          - Kubernetes deployment files
-          - Helm charts (both OCI and traditional repos)
-          - ArgoCD compatible configurations
-
-          #### Miscellaneous (`no_category.json5`)
-          - Pre-commit hooks
-          - Other tools not fitting main categories
-
-          ## Usage
-
-          To use these presets in your project, add to your `renovate.json`:
-
-          \`\`\`json
-          {
-            "extends": ["github>trowaflo/renovate-config"]
-          }
-          \`\`\`
-
-          Or use specific presets:
-
-          \`\`\`json
-          {
-            "extends": [
-              "github>trowaflo/renovate-config:ci.json5",
-              "github>trowaflo/renovate-config:docker.json5"
-            ]
-          }
-          \`\`\`
-
-          ## Configuration Details
+          ## 📦 Available Presets
 
           EOF
 
-          echo "### Package Rules Summary" >> README.md
-          echo "" >> README.md
+          # Generate documentation for each preset
+          for file in *.json *.json5; do
+            if [[ -f "$file" && "$file" != "renovate.json" ]]; then
+              name=$(basename "$file" | sed 's/\.[^.]*$//')
+              echo "### 🎯 $name" >> README.md
+              echo "" >> README.md
+              echo "\`\`\`json" >> README.md
+              echo "\"extends\": [\"github>trowaflo/renovate-config:$file\"]" >> README.md
+              echo "\`\`\`" >> README.md
+              echo "" >> README.md
 
-          # Extract package rules from each JSON5 file
-          for file in *.json5; do
-            if [[ -f "$file" ]]; then
-              echo "#### ${file%.*}" >> README.md
-              echo "" >> README.md
-              # Extract and format package rules
-              grep -A 20 "packageRules" "$file" | head -10 | sed 's/^/    /' >> README.md
-              echo "" >> README.md
+              # Extract description from file if available
+              if grep -q "packageRules" "$file"; then
+                echo "**Package Rules:**" >> README.md
+                grep -A 5 "packageRules" "$file" | grep -E "(matchManagers|matchUpdateTypes|labels|groupName)" | head -6 | sed 's/^/- /' >> README.md
+                echo "" >> README.md
+              fi
             fi
           done
 
-          echo "## Last Updated" >> README.md
+          cat >> README.md << 'EOF'
+
+          ## 🚀 Quick Start
+
+          Add to your `renovate.json`:
+          ```json
+          {
+            "extends": ["github>trowaflo/renovate-config"]
+          }
+          ```
+
+          ## 📋 Preset Details
+
+          EOF
+
+          echo "| Preset | Purpose | Auto-merge | Labels |" >> README.md
+          echo "|--------|---------|------------|--------|" >> README.md
+
+          for file in *.json5; do
+            if [[ -f "$file" ]]; then
+              name=$(basename "$file" .json5)
+              automerge=$(grep -o '"automerge": true' "$file" | wc -l | tr -d ' ')
+              labels=$(grep -o '"labels": \[[^]]*\]' "$file" | head -1 | sed 's/"labels": \[\([^]]*\)\]/\1/' | tr -d '"')
+              purpose=$(echo "$name" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
+              echo "| $name | $purpose | $automerge rules | $labels |" >> README.md
+            fi
+          done
+
           echo "" >> README.md
-          echo "Documentation generated on: $(date)" >> README.md
+          echo "---" >> README.md
+          echo "*Documentation auto-generated on $(date)*" >> README.md
 
-      - name: Check for changes
-        id: verify-changed-files
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
-          else
-            echo "changed=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Commit and push changes
-        if: steps.verify-changed-files.outputs.changed == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add README.md
-          git commit -m "docs: auto-update README.md [skip ci]"
-          git push
+      - name: Auto Commit Documentation
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: 📚 auto-update documentation [skip ci]"
+          file_pattern: "README.md"
+          commit_author: "GitHub Action <action@github.com>"
