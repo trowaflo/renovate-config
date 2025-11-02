@@ -9,9 +9,6 @@
     "local>trowaflo/renovate-config:git-ops.json5",
     "local>trowaflo/renovate-config:no_category.json5"
   ],
-  "schedule": [
-    "* * * * 5"
-  ],
   "reviewers": ["trowaflo"],
   "onboardingRebaseCheckbox": true,
   "onboardingConfig": {

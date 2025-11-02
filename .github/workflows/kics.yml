@@ -33,3 +33,16 @@ jobs:
       - name: Display results
         run: |
           cat ./results/results.json
+
+      - name: Upload results as artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kics-results
+          path: ./results/
+
+      - name: Upload SARIF to GitHub Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ./results/results.sarif
