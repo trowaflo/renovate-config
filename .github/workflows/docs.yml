@@ -1,0 +1,125 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+
+      - name: Generate README
+        run: |
+          cat > README.md << 'EOF'
+          # Renovate Configuration Presets
+
+          This repository contains shared Renovate configuration presets for consistent dependency management across projects.
+
+          ## Available Presets
+
+          ### 🔧 Main Configuration
+          - **`default.json`** - Complete configuration with all presets included
+          - **`renovate.json`** - Basic configuration extending the default preset
+
+          ### 📦 Specialized Presets
+
+          #### Ansible (`ansible.json5`)
+          - Ansible Galaxy collections updates
+          - Custom regex manager for Ansible vars files
+          - Separate handling for patch/minor vs major updates
+
+          #### CI/CD (`ci.json5`)
+          - GitHub Actions updates
+          - Automatic merging for patch/minor versions
+          - Manual review for major versions
+
+          #### Docker (`docker.json5`)
+          - Docker Compose service updates
+          - Grouped updates by severity
+          - Automated patch/minor updates
+
+          #### GitOps (`git-ops.json5`)
+          - Kubernetes deployment files
+          - Helm charts (both OCI and traditional repos)
+          - ArgoCD compatible configurations
+
+          #### Miscellaneous (`no_category.json5`)
+          - Pre-commit hooks
+          - Other tools not fitting main categories
+
+          ## Usage
+
+          To use these presets in your project, add to your `renovate.json`:
+
+          \`\`\`json
+          {
+            "extends": ["github>trowaflo/renovate-config"]
+          }
+          \`\`\`
+
+          Or use specific presets:
+
+          \`\`\`json
+          {
+            "extends": [
+              "github>trowaflo/renovate-config:ci.json5",
+              "github>trowaflo/renovate-config:docker.json5"
+            ]
+          }
+          \`\`\`
+
+          ## Configuration Details
+
+          EOF
+
+          echo "### Package Rules Summary" >> README.md
+          echo "" >> README.md
+
+          # Extract package rules from each JSON5 file
+          for file in *.json5; do
+            if [[ -f "$file" ]]; then
+              echo "#### ${file%.*}" >> README.md
+              echo "" >> README.md
+              # Extract and format package rules
+              grep -A 20 "packageRules" "$file" | head -10 | sed 's/^/    /' >> README.md
+              echo "" >> README.md
+            fi
+          done
+
+          echo "## Last Updated" >> README.md
+          echo "" >> README.md
+          echo "Documentation generated on: $(date)" >> README.md
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "docs: auto-update README.md [skip ci]"
+          git push
