@@ -1,0 +1,89 @@
+name: Auto Generate Documentation
+
+on:
+  push:
+    branches: [main]
+    paths: ['*.json', '*.json5']
+  pull_request:
+    paths: ['*.json', '*.json5']
+  workflow_dispatch:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Create Documentation
+        run: |
+          # Create a comprehensive README
+          cat > README.md << 'EOF'
+          # 🔧 Renovate Configuration Presets
+
+          This repository contains shared Renovate configuration presets for consistent dependency management across projects.
+
+          ## 🚀 Quick Start
+
+          To get started with these presets, simply include them in your Renovate configuration.
+
+          Add to your `renovate.json`:
+          ```json
+          {
+            "extends": ["github>trowaflo/renovate-config"]
+          }
+          ```
+
+          ## 📦 Available Presets
+
+          EOF
+
+          # Generate documentation for each preset
+          for file in *.json *.json5; do
+            if [[ -f "$file" && "$file" != "renovate.json" ]]; then
+              name=$(basename "$file" | sed 's/\.[^.]*$//')
+              echo "### 🎯 $name" >> README.md
+              echo "" >> README.md
+              echo "\`\`\`json" >> README.md
+              echo "\"extends\": [\"github>trowaflo/renovate-config:$file\"]" >> README.md
+              echo "\`\`\`" >> README.md
+              echo "" >> README.md
+            fi
+          done
+
+          cat >> README.md << 'EOF'
+
+          ## 📋 Preset Details
+
+          EOF
+
+          echo "| Preset | Purpose | Auto-merge | Labels |" >> README.md
+          echo "|--------|---------|------------|--------|" >> README.md
+
+          for file in *.json5; do
+            if [[ -f "$file" ]]; then
+              name=$(basename "$file" .json5)
+              automerge=$(grep -o '"automerge": true' "$file" | wc -l | tr -d ' ')
+              labels=$(grep -o '"labels": \[[^]]*\]' "$file" | head -1 | sed 's/"labels": \[\([^]]*\)\]/\1/' | tr -d '"')
+              purpose=$(echo "$name" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
+              echo "| $name | $purpose | $automerge rules | $labels |" >> README.md
+            fi
+          done
+
+          echo "" >> README.md
+          echo "---" >> README.md
+          echo "*Documentation auto-generated on $(date)*" >> README.md
+
+      - name: Commit Documentation
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet || git commit -m "docs: update documentation [skip ci]"
+          git push

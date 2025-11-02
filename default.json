@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    "github>trowaflo/renovate-config:ansible.json5",
+    "github>trowaflo/renovate-config:ci.json5",
+    "github>trowaflo/renovate-config:docker.json5",
+    "github>trowaflo/renovate-config:git-ops.json5",
+    "github>trowaflo/renovate-config:no_category.json5"
+  ],
+  "reviewers": ["trowaflo"],
+  "onboardingRebaseCheckbox": true,
+  "onboardingConfig": {
+    "extends": ["github>trowaflo/renovate-config"]
+  }
+}

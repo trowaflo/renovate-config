@@ -1,0 +1,24 @@
+{
+  "packageRules": [
+    // Docker Patch and Minor Updates
+    {
+      "matchManagers": ["docker-compose"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "labels": ["docker", "automerge"],
+      "groupName": "AUTOMERGE - Docker Patch and Minor Updates",
+      "commitMessageAction": "chore(docker):",
+      "commitMessageTopic": "{{depName}}",
+      "automerge": true
+    },
+    // Docker Major Updates
+    {
+      "matchManagers": ["docker-compose"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["docker", "breaking"],
+      "groupName": "BREAKING - Docker Major Updates",
+      "commitMessageAction": "chore(docker)!:",
+      "commitMessageTopic": "{{depName}}",
+      "automerge": false
+    }
+  ]
+}
