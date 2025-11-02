@@ -10,6 +10,15 @@
       "automerge": true
     },
     {
+      // GitHub Actions Updates - Major
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "BREAKING - GitHub Actions",
+      "commitMessageAction": "ci(github-actions)!:",
+      "commitMessageTopic": "{{depName}}",
+      "automerge": false
+    },
+    {
       // GitHub Actions Updates - Automerge defined by package
       "matchManagers": ["github-actions"],
       "matchPackageNames": ["actions/checkout"],
