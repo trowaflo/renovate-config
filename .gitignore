@@ -1,4 +1,0 @@
-*.tfstate
-.DS_Store
-.terraform*
-.decrypted~*
