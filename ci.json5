@@ -1,8 +1,8 @@
 {
   packageRules: [
     {
+      // GitHub Actions Updates - Automerge All
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["patch", "minor"],
       "matchPackageNames": ["actions/checkout"],
       "groupName": "AUTOMERGE - GitHub Actions",
       "commitMessageAction": "ci(github-actions):",
