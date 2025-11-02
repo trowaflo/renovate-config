@@ -5,6 +5,7 @@
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "AUTOMERGE - GitHub Actions",
+      "commitMessagePrefix": "",
       "commitMessageAction": "ci(github-actions):",
       "commitMessageTopic": "{{depName}}",
       "automerge": true
@@ -14,6 +15,7 @@
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major"],
       "groupName": "BREAKING - GitHub Actions",
+      "commitMessagePrefix": "",
       "commitMessageAction": "ci(github-actions)!:",
       "commitMessageTopic": "{{depName}}",
       "automerge": false
@@ -23,6 +25,7 @@
       "matchManagers": ["github-actions"],
       "matchPackageNames": ["actions/checkout"],
       "groupName": "AUTOMERGE - GitHub Actions",
+      "commitMessagePrefix": "",
       "commitMessageAction": "ci(github-actions):",
       "commitMessageTopic": "{{depName}}",
       "automerge": true
