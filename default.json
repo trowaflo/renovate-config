@@ -3,15 +3,15 @@
   "extends": [
     "config:recommended",
     ":dependencyDashboard",
-    "local>trowaflo/renovate-config:ansible.json5",
-    "local>trowaflo/renovate-config:ci.json5",
-    "local>trowaflo/renovate-config:docker.json5",
-    "local>trowaflo/renovate-config:git-ops.json5",
-    "local>trowaflo/renovate-config:no_category.json5"
+    "github>trowaflo/renovate-config:ansible.json5",
+    "github>trowaflo/renovate-config:ci.json5",
+    "github>trowaflo/renovate-config:docker.json5",
+    "github>trowaflo/renovate-config:git-ops.json5",
+    "github>trowaflo/renovate-config:no_category.json5"
   ],
   "reviewers": ["trowaflo"],
   "onboardingRebaseCheckbox": true,
   "onboardingConfig": {
-    "extends": ["local>trowaflo/renovate-config"]
+    "extends": ["github>trowaflo/renovate-config"]
   }
 }
