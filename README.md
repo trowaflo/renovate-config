@@ -2,6 +2,17 @@
 
 This repository contains shared Renovate configuration presets for consistent dependency management across projects.
 
+## 🚀 Quick Start
+
+To get started with these presets, simply include them in your Renovate configuration.
+
+Add to your `renovate.json`:
+```json
+{
+  "extends": ["github>trowaflo/renovate-config"]
+}
+```
+
 ## 📦 Available Presets
 
 ### 🎯 default
@@ -41,17 +52,6 @@ This repository contains shared Renovate configuration presets for consistent de
 ```
 
 
-## 🚀 Quick Start
-
-To get started with these presets, simply include them in your Renovate configuration.
-
-Add to your `renovate.json`:
-```json
-{
-  "extends": ["github>trowaflo/renovate-config"]
-}
-```
-
 ## 📋 Preset Details
 
 | Preset | Purpose | Auto-merge | Labels |
@@ -63,4 +63,4 @@ Add to your `renovate.json`:
 | no_category | No Category | 1 rules |  |
 
 ---
-*Documentation auto-generated on Sun Nov  2 10:50:58 UTC 2025*
+*Documentation auto-generated on Sun Nov  2 10:58:03 UTC 2025*
