@@ -63,4 +63,4 @@ Add to your `renovate.json`:
 | no_category | No Category | 1 rules |  |
 
 ---
-*Documentation auto-generated on Sun Nov  2 22:52:04 UTC 2025*
+*Documentation auto-generated on Fri Nov  7 20:29:00 UTC 2025*
