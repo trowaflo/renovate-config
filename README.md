@@ -51,6 +51,12 @@ Add to your `renovate.json`:
 "extends": ["github>trowaflo/renovate-config:no_category.json5"]
 ```
 
+### 🎯 renovate
+
+```json
+"extends": ["github>trowaflo/renovate-config:renovate.json5"]
+```
+
 
 ## 📋 Preset Details
 
@@ -61,6 +67,7 @@ Add to your `renovate.json`:
 | docker | Docker | 1 rules | docker, automerge |
 | git-ops | Git-Ops | 0 rules |  |
 | no_category | No Category | 1 rules |  |
+| renovate | Renovate | 0 rules |  |
 
 ---
-*Documentation auto-generated on Fri Nov  7 20:29:00 UTC 2025*
+*Documentation auto-generated on Sun Nov 23 16:56:40 UTC 2025*
