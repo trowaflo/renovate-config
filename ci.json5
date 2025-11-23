@@ -2,32 +2,32 @@
   packageRules: [
     {
       // GitHub Actions Updates - Automerge Patch and Minor
-      matchManagers: ["github-actions"],
-      matchUpdateTypes: ["patch", "minor"],
-      groupName: "AUTOMERGE - GitHub Actions",
-      commitMessagePrefix: "ci(github-actions):",
-      commitMessageAction: "",
-      commitMessageTopic: "{{depName}}",
+      matchManagers: ['github-actions'],
+      matchUpdateTypes: ['patch', 'minor'],
+      groupName: 'AUTOMERGE - GitHub Actions',
+      commitMessagePrefix: 'ci(github-actions):',
+      commitMessageAction: '',
+      commitMessageTopic: '{{depName}}',
       automerge: true
     },
     {
       // GitHub Actions Updates - Major
-      matchManagers: ["github-actions"],
-      matchUpdateTypes: ["major"],
-      groupName: "BREAKING - GitHub Actions",
-      commitMessagePrefix: "ci(github-actions)!:",
+      matchManagers: ['github-actions'],
+      matchUpdateTypes: ['major'],
+      groupName: 'BREAKING - GitHub Actions',
+      commitMessagePrefix: 'ci(github-actions)!:',
       commitMessageAction: 'BREAKING CHANGE',
-      commitMessageTopic: "{{depName}}",
+      commitMessageTopic: '{{depName}}',
       automerge: false
     },
     {
       // GitHub Actions Updates - Automerge defined by package
-      matchManagers: ["github-actions"],
-      matchPackageNames: ["actions/checkout"],
-      groupName: "AUTOMERGE - GitHub Actions",
-      commitMessagePrefix: "ci(github-actions):",
-      commitMessageAction: "",
-      commitMessageTopic: "{{depName}}",
+      matchManagers: ['github-actions'],
+      matchPackageNames: ['actions/checkout'],
+      groupName: 'GitHub Actions',
+      commitMessagePrefix: 'ci(github-actions):',
+      commitMessageAction: 'AUTOMERGE',
+      commitMessageTopic: '{{depName}}',
       automerge: true
     }
   ]
