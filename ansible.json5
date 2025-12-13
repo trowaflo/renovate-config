@@ -36,8 +36,8 @@
     {
       "matchManagers": ["regex"],
       "matchUpdateTypes": ["patch", "minor"],
-      "matchdatasources": ["github-releases"],
-      "matchfilepaths": [
+      "matchDatasources": ["github-releases"],
+      "matchFileNames": [
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\\/main\\.yml"
       ],
@@ -51,8 +51,8 @@
     {
       "matchManagers": ["regex"],
       "matchUpdateTypes": ["major"],
-      "matchdatasources": ["github-releases"],
-      "matchfilepaths": [
+      "matchDatasources": ["github-releases"],
+      "matchFileNames": [
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\\/main\\.yml"
       ],
