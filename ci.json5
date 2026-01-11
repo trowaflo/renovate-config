@@ -14,7 +14,7 @@
       // GitHub Actions Updates - Major
       matchManagers: ['github-actions'],
       matchUpdateTypes: ['major'],
-      groupName: 'BREAKING - GitHub Actions',
+      groupName: 'GitHub Actions',
       commitMessagePrefix: 'ci(github-actions)!:',
       commitMessageAction: 'BREAKING CHANGE',
       commitMessageTopic: '{{depName}}',
