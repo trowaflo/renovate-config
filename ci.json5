@@ -23,6 +23,7 @@
     {
       // GitHub Actions Updates - Automerge defined by package
       matchManagers: ['github-actions'],
+      matchUpdateTypes: ['major'],
       matchPackageNames: ['actions/checkout'],
       groupName: 'GitHub Actions',
       commitMessagePrefix: 'ci(github-actions):',
