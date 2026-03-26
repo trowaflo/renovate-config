@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended",
     ":dependencyDashboard",
+    "mergeConfidence:all-badges",
     "github>trowaflo/renovate-config:ansible.json5",
     "github>trowaflo/renovate-config:ci.json5",
     "github>trowaflo/renovate-config:docker.json5",
@@ -13,5 +14,10 @@
   "onboardingRebaseCheckbox": true,
   "onboardingConfig": {
     "extends": ["github>trowaflo/renovate-config"]
-  }
+  },
+  "packageRules": [
+    {
+      "minimumReleaseAge": "30 days"
+    }
+  ]
 }
