@@ -10,12 +10,14 @@ permissions: read-all
 
 jobs:
   quality:
-    uses: trowaflo/github-actions/.github/workflows/quality.yml@330d42c2b9d0601afce55c12df2d83222f17a1c6 # fix/actionlint-checksums-and-ci-permissions
+    uses: trowaflo/github-actions/.github/workflows/quality.yml@6f27522902d74162ae7493a5d7cddf64891659bb # fix/actionlint-checksums-and-ci-permissions
     with:
       enable_gitleaks: true
       enable_checkov: true
       enable_actionlint: true
       enable_markdown_lint: true
+      enable_kics: true
+      enable_trivy: true
     permissions:
       contents: write
       pull-requests: write
