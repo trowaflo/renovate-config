@@ -47,12 +47,14 @@ jobs:
           for file in *.json *.json5; do
             if [[ -f "$file" && "$file" != "renovate.json" ]]; then
               name=$(basename "$file" | sed 's/\.[^.]*$//')
-              echo "### 🎯 $name" >> README.md
-              echo "" >> README.md
-              echo "\`\`\`json" >> README.md
-              echo "\"extends\": [\"github>trowaflo/renovate-config:$file\"]" >> README.md
-              echo "\`\`\`" >> README.md
-              echo "" >> README.md
+              {
+                echo "### 🎯 $name"
+                echo ""
+                echo "\`\`\`json"
+                echo "\"extends\": [\"github>trowaflo/renovate-config:$file\"]"
+                echo "\`\`\`"
+                echo ""
+              } >> README.md
             fi
           done
 
@@ -62,8 +64,10 @@ jobs:
 
           EOF
 
-          echo "| Preset | Purpose | Auto-merge | Labels |" >> README.md
-          echo "|--------|---------|------------|--------|" >> README.md
+          {
+            echo "| Preset | Purpose | Auto-merge | Labels |"
+            echo "|--------|---------|------------|--------|"
+          } >> README.md
 
           for file in *.json5; do
             if [[ -f "$file" ]]; then
@@ -75,9 +79,11 @@ jobs:
             fi
           done
 
-          echo "" >> README.md
-          echo "---" >> README.md
-          echo "*Documentation auto-generated on $(date)*" >> README.md
+          {
+            echo ""
+            echo "---"
+            echo "*Documentation auto-generated on $(date)*"
+          } >> README.md
 
           # Add Minimum Release Age section from default.json
           if command -v python3 &>/dev/null && [ -f default.json ]; then
