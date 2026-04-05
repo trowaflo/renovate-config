@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality:
-    uses: trowaflo/github-actions/.github/workflows/quality.yml@88b7c8ab5b5e252c61c5c7b41e0e95c34a547ab5 # main
+    uses: trowaflo/github-actions/.github/workflows/quality.yml@6a63db6e37aeb8c1b1f6fae52c5f49c027058fc3 # v1.0.0
     with:
       enable_gitleaks: true
       enable_checkov: true
