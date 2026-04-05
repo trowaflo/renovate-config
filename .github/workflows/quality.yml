@@ -6,6 +6,8 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions: read-all
+
 jobs:
   quality:
     uses: trowaflo/github-actions/.github/workflows/quality.yml@6a63db6e37aeb8c1b1f6fae52c5f49c027058fc3 # v1.0.0

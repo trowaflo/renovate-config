@@ -7,6 +7,7 @@ This repository contains shared Renovate configuration presets for consistent de
 To get started with these presets, simply include them in your Renovate configuration.
 
 Add to your `renovate.json`:
+
 ```json
 {
   "extends": ["github>trowaflo/renovate-config"]
@@ -56,7 +57,6 @@ Add to your `renovate.json`:
 ```json
 "extends": ["github>trowaflo/renovate-config:renovate.json5"]
 ```
-
 
 ## 🔒 Minimum Release Age
 

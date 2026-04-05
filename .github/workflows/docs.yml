@@ -6,12 +6,13 @@ on:
     paths: ['*.json', '*.json5']
   workflow_dispatch:
 
+permissions: read-all
+
 jobs:
   docs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -77,6 +78,43 @@ jobs:
           echo "" >> README.md
           echo "---" >> README.md
           echo "*Documentation auto-generated on $(date)*" >> README.md
+
+          # Add Minimum Release Age section from default.json
+          if command -v python3 &>/dev/null && [ -f default.json ]; then
+            python3 -c "
+          import json, sys
+          with open('default.json') as f:
+              cfg = json.load(f)
+          age = cfg.get('minimumReleaseAge')
+          behaviour = cfg.get('minimumReleaseAgeBehaviour')
+          checks = cfg.get('internalChecksFilter')
+          if age:
+              lines = [
+                  '',
+                  '## 🔒 Minimum Release Age',
+                  '',
+                  'The default preset enforces a **{}-day minimum release age** with strict security settings:'.format(age),
+                  '',
+                  '| Option | Value |',
+                  '|--------|-------|',
+                  '| \`minimumReleaseAge\` | \`{}\` |'.format(age),
+              ]
+              if behaviour:
+                  lines.append('| \`minimumReleaseAgeBehaviour\` | \`{}\` |'.format(behaviour))
+              if checks:
+                  lines.append('| \`internalChecksFilter\` | \`{}\` |'.format(checks))
+              lines.append('')
+              lines.append('> **Note** : Security updates bypass minimumReleaseAge.')
+              # Insert before the --- line
+              with open('README.md') as f:
+                  content = f.read()
+              idx = content.rfind('\n---\n')
+              if idx >= 0:
+                  content = content[:idx] + '\n'.join(lines) + '\n' + content[idx:]
+              with open('README.md', 'w') as f:
+                  f.write(content)
+          "
+          fi
 
       - name: Commit Documentation
         run: |
