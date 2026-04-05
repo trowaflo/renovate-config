@@ -1,0 +1,20 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  quality:
+    uses: trowaflo/github-actions/.github/workflows/quality.yml@88b7c8ab5b5e252c61c5c7b41e0e95c34a547ab5 # main
+    with:
+      enable_gitleaks: true
+      enable_checkov: true
+      enable_actionlint: true
+      enable_markdown_lint: true
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
