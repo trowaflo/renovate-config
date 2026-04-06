@@ -19,5 +19,6 @@
     {
       "minimumReleaseAge": "30 days"
     }
-  ]
+  ],
+  "commitBodyTable": true
 }
