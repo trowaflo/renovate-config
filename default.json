@@ -15,6 +15,10 @@
   "onboardingConfig": {
     "extends": ["github>trowaflo/renovate-config"]
   },
-
+  "packageRules": [
+    {
+      "minimumReleaseAge": "30 days"
+    }
+  ],
   "commitBodyTable": true
 }
