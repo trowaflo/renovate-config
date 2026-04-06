@@ -8,6 +8,8 @@
     "github>trowaflo/renovate-config:ci.json5",
     "github>trowaflo/renovate-config:docker.json5",
     "github>trowaflo/renovate-config:git-ops.json5",
+    "github>trowaflo/renovate-config:helm.json5",
+    "github>trowaflo/renovate-config:kubernetes.json5",
     "github>trowaflo/renovate-config:no_category.json5"
   ],
   "reviewers": ["trowaflo"],
