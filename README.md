@@ -70,4 +70,4 @@ Add to your `renovate.json`:
 | renovate | Renovate | 0 rules |  |
 
 ---
-*Documentation auto-generated on Mon Apr  6 07:43:49 UTC 2026*
+*Documentation auto-generated on Mon Apr  6 07:55:35 UTC 2026*
