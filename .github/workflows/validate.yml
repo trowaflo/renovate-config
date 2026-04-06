@@ -1,9 +1,6 @@
 name: Validate Renovate Config
 
 on:
-  push:
-    branches: [main]
-    paths: ['*.json', '*.json5']
   pull_request:
     paths: ['*.json', '*.json5']
   workflow_dispatch:
