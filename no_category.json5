@@ -3,9 +3,25 @@
     "enabled": true
   },
   "packageRules": [
+    // Pre-commit - Patch and Minor
     {
       "matchManagers": ["pre-commit"],
       "matchPackageNames": ["ansible/ansible-lint", "gitleaks/gitleaks"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "Pre-commit (non-major)",
+      "commitMessagePrefix": "chore(pre-commit):",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
+      "automerge": false
+    },
+    // Pre-commit - Major
+    {
+      "matchManagers": ["pre-commit"],
+      "matchPackageNames": ["ansible/ansible-lint", "gitleaks/gitleaks"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["breaking"],
+      "groupName": "Pre-commit (major)",
+      "commitMessagePrefix": "chore(pre-commit)!:",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
       "automerge": false
     }
   ]
