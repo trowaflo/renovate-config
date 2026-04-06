@@ -5,18 +5,14 @@
       matchManagers: ['github-actions'],
       matchUpdateTypes: ['patch', 'minor'],
       groupName: 'GitHub Actions (non-major)',
-      commitMessagePrefix: 'ci(github-actions):',
-      commitMessageExtra: '({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})',
-      automerge: false
+      commitMessagePrefix: 'ci(github-actions):'
     },
     {
       // GitHub Actions - Major (breaking) grouped
       matchManagers: ['github-actions'],
       matchUpdateTypes: ['major'],
       groupName: 'GitHub Actions (major)',
-      commitMessagePrefix: 'ci(github-actions)!:',
-      commitMessageExtra: '({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})',
-      automerge: false
+      commitMessagePrefix: 'ci(github-actions)!:'
     }
   ]
 }

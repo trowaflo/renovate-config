@@ -18,5 +18,12 @@
   "minimumReleaseAge": "30 days",
   "minimumReleaseAgeBehaviour": "timestamp-required",
   "internalChecksFilter": "strict",
-  "commitBodyTable": true
+  "commitBodyTable": true,
+  "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["breaking"]
+    }
+  ]
 }
