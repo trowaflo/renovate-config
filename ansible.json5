@@ -12,27 +12,27 @@
     }
   ],
   "packageRules": [
-    // Ansible Galaxy Patch and Minor Updates
+    // Ansible Galaxy - Patch and Minor
     {
       "matchManagers": ["ansible-galaxy"],
       "matchUpdateTypes": ["patch", "minor"],
-      "labels": ["ansible-galaxy", "automerge"],
-      "groupName": "AUTOMERGE - Ansible Galaxy Patch and Minor Updates",
-      "commitMessageAction": "chore(ansible-galaxy):",
-      "commitMessageTopic": "{{depName}}",
-      "automerge": true
+      "labels": ["ansible-galaxy"],
+      "groupName": "Ansible Galaxy (non-major)",
+      "commitMessagePrefix": "chore(ansible-galaxy):",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
+      "automerge": false
     },
-    // Ansible Galaxy Major Updates
+    // Ansible Galaxy - Major
     {
       "matchManagers": ["ansible-galaxy"],
       "matchUpdateTypes": ["major"],
       "labels": ["ansible-galaxy", "breaking"],
-      "groupName": "BREAKING - Ansible Galaxy Major Updates",
-      "commitMessageAction": "chore(ansible-galaxy)!:",
-      "commitMessageTopic": "{{depName}}",
+      "groupName": "Ansible Galaxy (major)",
+      "commitMessagePrefix": "chore(ansible-galaxy)!:",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
       "automerge": false
     },
-    // Ansible vars Patch and Minor Updates
+    // Ansible vars - Patch and Minor
     {
       "matchManagers": ["regex"],
       "matchUpdateTypes": ["patch", "minor"],
@@ -41,13 +41,13 @@
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\\/main\\.yml"
       ],
-      "labels": ["automerge"],
-      "groupName": "AUTOMERGE - Ansible vars Patch and Minor Updates",
-      "commitMessageAction": "chore(ansible-vars):",
-      "commitMessageTopic": "{{depName}}",
-      "automerge": true
+      "labels": ["ansible-vars"],
+      "groupName": "Ansible vars (non-major)",
+      "commitMessagePrefix": "chore(ansible-vars):",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
+      "automerge": false
     },
-    // Ansible vars Major Updates
+    // Ansible vars - Major
     {
       "matchManagers": ["regex"],
       "matchUpdateTypes": ["major"],
@@ -56,10 +56,10 @@
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\\/main\\.yml"
       ],
-      "labels": ["automerge"],
-      "groupName": "BREAKING - Ansible vars Major Updates",
-      "commitMessageAction": "chore(ansible-vars)!:",
-      "commitMessageTopic": "{{depName}}",
+      "labels": ["ansible-vars", "breaking"],
+      "groupName": "Ansible vars (major)",
+      "commitMessagePrefix": "chore(ansible-vars)!:",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
       "automerge": false
     }
   ]

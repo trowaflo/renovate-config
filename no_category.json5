@@ -6,7 +6,7 @@
     {
       "matchManagers": ["pre-commit"],
       "matchPackageNames": ["ansible/ansible-lint", "gitleaks/gitleaks"],
-      "automerge": true
+      "automerge": false
     }
   ]
 }
