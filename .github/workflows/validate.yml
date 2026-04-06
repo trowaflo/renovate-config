@@ -12,4 +12,4 @@ permissions: read-all
 
 jobs:
   validate:
-    uses: trowaflo/github-actions/.github/workflows/validate-renovate.yml@e0f15ffcf8342689bea38a3818c5899e4077dc84 # PR#26 fix/deep-review-findings
+    uses: trowaflo/github-actions/.github/workflows/validate-renovate.yml@2d0b298720218d3d12a39e59dcbdfbe6bcd39fa5 # PR#29 fix/deep-review-findings
