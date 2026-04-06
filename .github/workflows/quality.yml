@@ -10,7 +10,7 @@ permissions: read-all
 
 jobs:
   quality:
-    uses: trowaflo/github-actions/.github/workflows/quality.yml@4980c823b9d77d3cc8c69c6749e1b1884cdf1cac # PR#29 fix/deep-review-findings
+    uses: trowaflo/github-actions/.github/workflows/quality.yml@fba3f66ab2fa1cac298095705544a7d71ed7be7f # github-actions main (pre-v3.0.0)
     with:
       enable_gitleaks: true
       enable_checkov: true
