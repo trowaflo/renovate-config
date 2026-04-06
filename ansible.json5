@@ -16,11 +16,11 @@
     {
       "matchManagers": ["ansible-galaxy"],
       "matchUpdateTypes": ["patch", "minor"],
-      "labels": ["ansible-galaxy", "automerge"],
-      "groupName": "AUTOMERGE - Ansible Galaxy Patch and Minor Updates",
+      "labels": ["ansible-galaxy"],
+      "groupName": "Ansible Galaxy Patch and Minor Updates",
       "commitMessageAction": "chore(ansible-galaxy):",
       "commitMessageTopic": "{{depName}}",
-      "automerge": true
+      "automerge": false
     },
     // Ansible Galaxy Major Updates
     {
@@ -41,11 +41,11 @@
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\\/main\\.yml"
       ],
-      "labels": ["automerge"],
-      "groupName": "AUTOMERGE - Ansible vars Patch and Minor Updates",
+      "labels": ["ansible-vars"],
+      "groupName": "Ansible vars Patch and Minor Updates",
       "commitMessageAction": "chore(ansible-vars):",
       "commitMessageTopic": "{{depName}}",
-      "automerge": true
+      "automerge": false
     },
     // Ansible vars Major Updates
     {
@@ -56,8 +56,8 @@
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\\/main\\.yml"
       ],
-      "labels": ["automerge"],
-      "groupName": "BREAKING - Ansible vars Major Updates",
+      "labels": ["ansible-vars", "breaking"],
+      "groupName": "Ansible vars Major Updates",
       "commitMessageAction": "chore(ansible-vars)!:",
       "commitMessageTopic": "{{depName}}",
       "automerge": false

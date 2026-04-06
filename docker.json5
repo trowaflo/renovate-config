@@ -4,18 +4,18 @@
     {
       "matchManagers": ["docker-compose"],
       "matchUpdateTypes": ["patch", "minor"],
-      "labels": ["docker", "automerge"],
-      "groupName": "AUTOMERGE - Docker Patch and Minor Updates",
+      "labels": ["docker"],
+      "groupName": "Docker Patch and Minor Updates",
       "commitMessageAction": "chore(docker):",
       "commitMessageTopic": "{{depName}}",
-      "automerge": true
+      "automerge": false
     },
     // Docker Major Updates
     {
       "matchManagers": ["docker-compose"],
       "matchUpdateTypes": ["major"],
       "labels": ["docker", "breaking"],
-      "groupName": "BREAKING - Docker Major Updates",
+      "groupName": "Docker Major Updates",
       "commitMessageAction": "chore(docker)!:",
       "commitMessageTopic": "{{depName}}",
       "automerge": false
