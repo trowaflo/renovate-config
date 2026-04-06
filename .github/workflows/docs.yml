@@ -6,8 +6,6 @@ on:
     paths: ['*.json', '*.json5']
   workflow_dispatch:
 
-permissions: read-all
-
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -87,8 +85,12 @@ jobs:
           if command -v python3 &>/dev/null && [ -f default.json ]; then
             python3 -c "
           import json, sys
-          with open('default.json') as f:
-              cfg = json.load(f)
+          try:
+              with open('default.json') as f:
+                  cfg = json.load(f)
+          except (json.JSONDecodeError, IOError) as e:
+              print(f'Warning: Could not parse default.json: {e}', file=sys.stderr)
+              sys.exit(0)
           age = cfg.get('minimumReleaseAge')
           behaviour = cfg.get('minimumReleaseAgeBehaviour')
           checks = cfg.get('internalChecksFilter')
@@ -97,7 +99,7 @@ jobs:
                   '',
                   '## 🔒 Minimum Release Age',
                   '',
-                  'The default preset enforces a **{}-day minimum release age** with strict security settings:'.format(age),
+                  'The default preset enforces a **{}** minimum release age with strict security settings:'.format(age),
                   '',
                   '| Option | Value |',
                   '|--------|-------|',
