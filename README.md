@@ -62,12 +62,12 @@ Add to your `renovate.json`:
 
 | Preset | Purpose | Auto-merge | Labels |
 |--------|---------|------------|--------|
-| ansible | Ansible | 2 rules | ansible-galaxy, automerge |
+| ansible | Ansible | 0 rules | ansible-galaxy |
 | ci | Ci | 0 rules |  |
-| docker | Docker | 1 rules | docker, automerge |
+| docker | Docker | 0 rules | docker |
 | git-ops | Git-Ops | 0 rules |  |
-| no_category | No Category | 1 rules |  |
+| no_category | No Category | 0 rules |  |
 | renovate | Renovate | 0 rules |  |
 
 ---
-*Documentation auto-generated on Mon Apr  6 07:55:35 UTC 2026*
+*Documentation auto-generated on Mon Apr  6 08:04:22 UTC 2026*
