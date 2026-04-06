@@ -10,7 +10,7 @@ permissions: read-all
 
 jobs:
   quality:
-    uses: trowaflo/github-actions/.github/workflows/quality.yml@2b7e3d26a16bef55dcc7c5c274f97ae4fc845f08 # feat/json-lint-and-validate-renovate
+    uses: trowaflo/github-actions/.github/workflows/quality.yml@aafde95df68b61a63c1cb3aa4a1d65ea25baf2e1 # PR#21 feat/sarif-upload-checkov-trivy
     with:
       enable_gitleaks: true
       enable_checkov: true
@@ -23,3 +23,4 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
+      security-events: write
