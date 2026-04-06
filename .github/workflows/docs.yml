@@ -6,6 +6,8 @@ on:
     paths: ['*.json', '*.json5']
   workflow_dispatch:
 
+permissions: read-all
+
 jobs:
   docs:
     runs-on: ubuntu-latest
