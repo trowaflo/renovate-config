@@ -6,19 +6,15 @@
       "matchUpdateTypes": ["patch", "minor"],
       "labels": ["docker"],
       "groupName": "Docker (non-major)",
-      "commitMessagePrefix": "chore(docker):",
-      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
-      "automerge": false
+      "commitMessagePrefix": "chore(docker):"
     },
     // Docker - Major
     {
       "matchManagers": ["docker-compose"],
       "matchUpdateTypes": ["major"],
-      "labels": ["docker", "breaking"],
+      "labels": ["docker"],
       "groupName": "Docker (major)",
-      "commitMessagePrefix": "chore(docker)!:",
-      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
-      "automerge": false
+      "commitMessagePrefix": "chore(docker)!:"
     }
   ]
 }

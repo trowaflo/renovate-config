@@ -1,23 +1,23 @@
 name: Auto Generate Documentation
 
 on:
-  push:
-    branches: [main]
+  pull_request:
     paths: ['*.json', '*.json5']
   workflow_dispatch:
+
+permissions: read-all
 
 jobs:
   docs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
+          ref: ${{ github.head_ref }}
 
       - name: Create Documentation
         run: |
@@ -46,23 +46,26 @@ jobs:
           for file in *.json *.json5; do
             if [[ -f "$file" && "$file" != "renovate.json" ]]; then
               name=$(basename "$file" | sed 's/\.[^.]*$//')
-              echo "### 🎯 $name" >> README.md
-              echo "" >> README.md
-              echo "\`\`\`json" >> README.md
-              echo "\"extends\": [\"github>trowaflo/renovate-config:$file\"]" >> README.md
-              echo "\`\`\`" >> README.md
-              echo "" >> README.md
+              {
+                echo "### 🎯 $name"
+                echo ""
+                echo "\`\`\`json"
+                echo "\"extends\": [\"github>trowaflo/renovate-config:$file\"]"
+                echo "\`\`\`"
+                echo ""
+              } >> README.md
             fi
           done
 
           cat >> README.md << 'EOF'
-
           ## 📋 Preset Details
 
           EOF
 
-          echo "| Preset | Purpose | Auto-merge | Labels |" >> README.md
-          echo "|--------|---------|------------|--------|" >> README.md
+          {
+            echo "| Preset | Purpose | Auto-merge | Labels |"
+            echo "|--------|---------|------------|--------|"
+          } >> README.md
 
           for file in *.json5; do
             if [[ -f "$file" ]]; then
@@ -74,9 +77,52 @@ jobs:
             fi
           done
 
-          echo "" >> README.md
-          echo "---" >> README.md
-          echo "*Documentation auto-generated on $(date)*" >> README.md
+          {
+            echo ""
+            echo "---"
+            echo "*Documentation auto-generated on $(date)*"
+          } >> README.md
+
+          # Add Minimum Release Age section from default.json
+          if command -v python3 &>/dev/null && [ -f default.json ]; then
+            python3 -c "
+          import json, sys
+          try:
+              with open('default.json') as f:
+                  cfg = json.load(f)
+          except (json.JSONDecodeError, IOError) as e:
+              print(f'Warning: Could not parse default.json: {e}', file=sys.stderr)
+              sys.exit(0)
+          age = cfg.get('minimumReleaseAge')
+          behaviour = cfg.get('minimumReleaseAgeBehaviour')
+          checks = cfg.get('internalChecksFilter')
+          if age:
+              lines = [
+                  '',
+                  '## 🔒 Minimum Release Age',
+                  '',
+                  'The default preset enforces a **{}** minimum release age with strict security settings:'.format(age),
+                  '',
+                  '| Option | Value |',
+                  '|--------|-------|',
+                  '| \`minimumReleaseAge\` | \`{}\` |'.format(age),
+              ]
+              if behaviour:
+                  lines.append('| \`minimumReleaseAgeBehaviour\` | \`{}\` |'.format(behaviour))
+              if checks:
+                  lines.append('| \`internalChecksFilter\` | \`{}\` |'.format(checks))
+              lines.append('')
+              lines.append('> **Note** : Security updates bypass minimumReleaseAge.')
+              # Insert before the --- line
+              with open('README.md') as f:
+                  content = f.read()
+              idx = content.rfind('\n---\n')
+              if idx >= 0:
+                  content = content[:idx] + '\n'.join(lines) + '\n' + content[idx:]
+              with open('README.md', 'w') as f:
+                  f.write(content)
+          "
+          fi
 
       - name: Commit Documentation
         run: |

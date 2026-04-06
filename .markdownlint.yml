@@ -1,0 +1,5 @@
+# markdownlint configuration
+# MD013 - Line length disabled (tables have long lines)
+# MD060 - Table column style disabled (auto-generated tables)
+MD013: false
+MD060: false

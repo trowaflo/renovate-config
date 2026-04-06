@@ -12,4 +12,4 @@ permissions: read-all
 
 jobs:
   validate:
-    uses: trowaflo/github-actions/.github/workflows/validate-renovate.yml@fd881256daff836dd9595efd90f646c26a6deae4 # v2.0.0
+    uses: trowaflo/github-actions/.github/workflows/validate-renovate.yml@0f13bed7ee93c1b8b51ce18fd3a6b9726c22b886 # v3.0.0
