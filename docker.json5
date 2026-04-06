@@ -1,23 +1,23 @@
 {
   "packageRules": [
-    // Docker Patch and Minor Updates
+    // Docker - Patch and Minor
     {
       "matchManagers": ["docker-compose"],
       "matchUpdateTypes": ["patch", "minor"],
       "labels": ["docker"],
-      "groupName": "Docker Patch and Minor Updates",
-      "commitMessageAction": "chore(docker):",
-      "commitMessageTopic": "{{depName}}",
+      "groupName": "Docker (non-major)",
+      "commitMessagePrefix": "chore(docker):",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
       "automerge": false
     },
-    // Docker Major Updates
+    // Docker - Major
     {
       "matchManagers": ["docker-compose"],
       "matchUpdateTypes": ["major"],
       "labels": ["docker", "breaking"],
-      "groupName": "Docker Major Updates",
-      "commitMessageAction": "chore(docker)!:",
-      "commitMessageTopic": "{{depName}}",
+      "groupName": "Docker (major)",
+      "commitMessagePrefix": "chore(docker)!:",
+      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
       "automerge": false
     }
   ]
