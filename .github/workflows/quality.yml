@@ -10,7 +10,7 @@ permissions: read-all
 
 jobs:
   quality:
-    uses: trowaflo/github-actions/.github/workflows/quality.yml@aafde95df68b61a63c1cb3aa4a1d65ea25baf2e1 # PR#21 feat/sarif-upload-checkov-trivy
+    uses: trowaflo/github-actions/.github/workflows/quality.yml@e0f15ffcf8342689bea38a3818c5899e4077dc84 # PR#26 fix/deep-review-findings
     with:
       enable_gitleaks: true
       enable_checkov: true

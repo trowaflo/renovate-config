@@ -12,4 +12,4 @@ permissions: read-all
 
 jobs:
   validate:
-    uses: trowaflo/github-actions/.github/workflows/validate-renovate.yml@aafde95df68b61a63c1cb3aa4a1d65ea25baf2e1 # PR#21 feat/sarif-upload-checkov-trivy
+    uses: trowaflo/github-actions/.github/workflows/validate-renovate.yml@e0f15ffcf8342689bea38a3818c5899e4077dc84 # PR#26 fix/deep-review-findings
