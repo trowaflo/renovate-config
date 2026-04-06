@@ -1,23 +1,11 @@
 {
   packageRules: [
     {
-      // GitHub Actions Updates - Patch and Minor (automerge disabled - review manually after TeamPCP attack 2026-03-23)
+      // GitHub Actions Updates - all types grouped in a single PR
       matchManagers: ['github-actions'],
-      matchUpdateTypes: ['patch', 'minor'],
       groupName: 'GitHub Actions',
-      commitMessagePrefix: 'ci(github-actions):',
-      commitMessageAction: '',
-      commitMessageTopic: '{{depName}}',
-      automerge: false
-    },
-    {
-      // GitHub Actions Updates - Major
-      matchManagers: ['github-actions'],
-      matchUpdateTypes: ['major'],
-      groupName: 'GitHub Actions',
-      commitMessagePrefix: 'ci(github-actions)!:',
-      commitMessageAction: 'BREAKING CHANGE',
-      commitMessageTopic: '{{depName}}',
+      separateMajorMinor: false,
+      commitMessagePrefix: 'ci(github-actions){{#if isMajor}}!{{/if}}:',
       automerge: false
     }
   ]
