@@ -1,0 +1,62 @@
+{
+  "customManagers": [
+    // YAML files with # renovate: comments (image pattern)
+    {
+      "customType": "regex",
+      "fileMatch": ["\\.ya?ml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s+?image:\\s*[^:]+:(?<currentValue>[^\\s\"'\\n]+)"
+      ]
+    },
+    // YAML files with # renovate: comments (value pattern)
+    {
+      "customType": "regex",
+      "fileMatch": ["\\.ya?ml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n(?:[^\\n]*\\n)?\\s*value:\\s*[\"']?(?<currentValue>[^\"'\\s\\n]+)[\"']?"
+      ]
+    },
+    // YAML files with # renovate: comments (version in group_vars)
+    {
+      "customType": "regex",
+      "fileMatch": ["\\.ya?ml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?:\\s+registryUrl=(?<registryUrl>\\S+))?\\n[^:]*:\\n\\s+version: \"(?<currentValue>[v]?[\\d\\.\\+\\-a-zA-Z]+)\""
+      ]
+    }
+  ],
+  "packageRules": [
+    // Helm Values - Non-major
+    {
+      "matchManagers": ["helm-values"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "labels": ["helm-values"],
+      "groupName": "Helm Values (non-major)",
+      "commitMessagePrefix": "chore(helm-values):"
+    },
+    // Helm Values - Major
+    {
+      "matchManagers": ["helm-values"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["helm-values"],
+      "groupName": "Helm Values (major)",
+      "commitMessagePrefix": "chore(helm-values)!:"
+    },
+    // Kubernetes - Non-major
+    {
+      "matchManagers": ["kubernetes"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "labels": ["kubernetes"],
+      "groupName": "Kubernetes (non-major)",
+      "commitMessagePrefix": "chore(kubernetes):"
+    },
+    // Kubernetes - Major
+    {
+      "matchManagers": ["kubernetes"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["kubernetes"],
+      "groupName": "Kubernetes (major)",
+      "commitMessagePrefix": "chore(kubernetes)!:"
+    }
+  ]
+}
