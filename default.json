@@ -8,6 +8,8 @@
     "github>trowaflo/renovate-config:ci.json5",
     "github>trowaflo/renovate-config:docker.json5",
     "github>trowaflo/renovate-config:git-ops.json5",
+    "github>trowaflo/renovate-config:helm.json5",
+    "github>trowaflo/renovate-config:kubernetes.json5",
     "github>trowaflo/renovate-config:no_category.json5"
   ],
   "reviewers": ["trowaflo"],
@@ -15,10 +17,15 @@
   "onboardingConfig": {
     "extends": ["github>trowaflo/renovate-config"]
   },
+  "minimumReleaseAge": "30 days",
+  "minimumReleaseAgeBehaviour": "timestamp-required",
+  "internalChecksFilter": "strict",
+  "commitBodyTable": true,
+  "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
   "packageRules": [
     {
-      "minimumReleaseAge": "30 days"
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["breaking"]
     }
-  ],
-  "commitBodyTable": true
+  ]
 }

@@ -1,0 +1,31 @@
+{
+  "packageRules": [
+    // Helm Charts - Patch (auto-bump chart version)
+    {
+      "matchManagers": ["helmv3", "helm-values"],
+      "matchUpdateTypes": ["patch"],
+      "labels": ["helm"],
+      "groupName": "Helm (patch)",
+      "commitMessagePrefix": "chore(helm):",
+      "bumpVersion": "patch"
+    },
+    // Helm Charts - Minor (auto-bump chart version)
+    {
+      "matchManagers": ["helmv3", "helm-values"],
+      "matchUpdateTypes": ["minor"],
+      "labels": ["helm"],
+      "groupName": "Helm (minor)",
+      "commitMessagePrefix": "chore(helm):",
+      "bumpVersion": "minor"
+    },
+    // Helm Charts - Major (auto-bump chart version)
+    {
+      "matchManagers": ["helmv3", "helm-values"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["helm"],
+      "groupName": "Helm (major)",
+      "commitMessagePrefix": "chore(helm)!:",
+      "bumpVersion": "major"
+    }
+  ]
+}

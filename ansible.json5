@@ -1,6 +1,7 @@
 {
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\/main\\.yml"
@@ -18,19 +19,15 @@
       "matchUpdateTypes": ["patch", "minor"],
       "labels": ["ansible-galaxy"],
       "groupName": "Ansible Galaxy (non-major)",
-      "commitMessagePrefix": "chore(ansible-galaxy):",
-      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
-      "automerge": false
+      "commitMessagePrefix": "chore(ansible-galaxy):"
     },
     // Ansible Galaxy - Major
     {
       "matchManagers": ["ansible-galaxy"],
       "matchUpdateTypes": ["major"],
-      "labels": ["ansible-galaxy", "breaking"],
+      "labels": ["ansible-galaxy"],
       "groupName": "Ansible Galaxy (major)",
-      "commitMessagePrefix": "chore(ansible-galaxy)!:",
-      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
-      "automerge": false
+      "commitMessagePrefix": "chore(ansible-galaxy)!:"
     },
     // Ansible vars - Patch and Minor
     {
@@ -43,9 +40,7 @@
       ],
       "labels": ["ansible-vars"],
       "groupName": "Ansible vars (non-major)",
-      "commitMessagePrefix": "chore(ansible-vars):",
-      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
-      "automerge": false
+      "commitMessagePrefix": "chore(ansible-vars):"
     },
     // Ansible vars - Major
     {
@@ -56,11 +51,9 @@
         "^ansible\/group_vars\/.*\\.yml",
         "^vars\\/main\\.yml"
       ],
-      "labels": ["ansible-vars", "breaking"],
+      "labels": ["ansible-vars"],
       "groupName": "Ansible vars (major)",
-      "commitMessagePrefix": "chore(ansible-vars)!:",
-      "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
-      "automerge": false
+      "commitMessagePrefix": "chore(ansible-vars)!:"
     }
   ]
 }
