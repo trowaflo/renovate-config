@@ -13,19 +13,21 @@
     "github>trowaflo/renovate-config:no_category.json5"
   ],
   "reviewers": ["trowaflo"],
-  "onboardingRebaseCheckbox": true,
-  "onboardingConfig": {
-    "extends": ["github>trowaflo/renovate-config"]
-  },
   "minimumReleaseAge": "30 days",
-  "minimumReleaseAgeBehaviour": "timestamp-required",
+  "minimumReleaseAgeBehavior": "timestamp-required",
   "internalChecksFilter": "strict",
   "commitBodyTable": true,
   "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
+  "pinDigests": true,
+  "rangeStrategy": "pin",
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
       "addLabels": ["breaking"]
     }
+  ],
+  "timezone": "Europe/Paris",
+  "schedule": [
+    "before 5am on the first day of the month"
   ]
 }

@@ -46,6 +46,18 @@ Add to your `renovate.json`:
 "extends": ["github>trowaflo/renovate-config:git-ops.json5"]
 ```
 
+### 🎯 helm
+
+```json
+"extends": ["github>trowaflo/renovate-config:helm.json5"]
+```
+
+### 🎯 kubernetes
+
+```json
+"extends": ["github>trowaflo/renovate-config:kubernetes.json5"]
+```
+
 ### 🎯 no_category
 
 ```json
@@ -58,28 +70,29 @@ Add to your `renovate.json`:
 "extends": ["github>trowaflo/renovate-config:renovate.json5"]
 ```
 
-## 🔒 Minimum Release Age
-
-The default preset enforces a **30-day minimum release age** for all dependencies, with strict security settings:
-
-| Option | Value | Description |
-|--------|-------|-------------|
-| `minimumReleaseAge` | `30 days` | Renovate attend 30 jours après la publication d'une release avant de proposer la mise à jour. |
-| `minimumReleaseAgeBehaviour` | `timestamp-required` | Si une release n'a pas de timestamp, elle est considérée comme non éligible (comportement sécuritaire). |
-| `internalChecksFilter` | `strict` | Aucune branche ni PR n'est créée tant que le délai de `minimumReleaseAge` n'est pas atteint. Les mises à jour en attente sont visibles dans le Dependency Dashboard sous "Pending Status Checks". |
-
-> **Note** : Les mises à jour de sécurité (security updates) contournent le `minimumReleaseAge` et sont proposées immédiatement.
-
 ## 📋 Preset Details
 
 | Preset | Purpose | Auto-merge | Labels |
 |--------|---------|------------|--------|
-| ansible | Ansible | 0 rules | ansible-galaxy |
+| ansible | Ansible | 0 rules |  |
 | ci | Ci | 0 rules |  |
 | docker | Docker | 0 rules | docker |
 | git-ops | Git-Ops | 0 rules |  |
+| helm | Helm | 0 rules | helm |
+| kubernetes | Kubernetes | 0 rules |  |
 | no_category | No Category | 0 rules |  |
 | renovate | Renovate | 0 rules |  |
 
+## 🔒 Minimum Release Age
+
+The default preset enforces a **30 days** minimum release age with strict security settings:
+
+| Option | Value |
+|--------|-------|
+| `minimumReleaseAge` | `30 days` |
+| `internalChecksFilter` | `strict` |
+
+> **Note** : Security updates bypass minimumReleaseAge.
+
 ---
-*Documentation auto-generated on Mon Apr  6 08:04:22 UTC 2026*
+*Documentation auto-generated on Fri Apr 24 20:22:51 UTC 2026*

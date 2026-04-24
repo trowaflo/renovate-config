@@ -30,8 +30,7 @@ Each preset follows the same pattern:
 
 1. **Group patch+minor together**, major separately — one `groupName` per update type bucket.
 2. **`commitMessagePrefix`** follows conventional commits: `chore(<scope>):` for non-major, `chore(<scope>)!:` for major.
-3. **Labels** match the domain name (e.g. `"docker"`, `"helm"`, `"ansible-galaxy"`).
-4. No auto-merge is configured in any preset.
+3. No auto-merge is configured in any preset.
 
 When adding a new preset:
 
@@ -42,9 +41,3 @@ When adding a new preset:
 ## Workflow pinning policy
 
 All `uses:` in workflows are pinned to a **full commit SHA** with a `# vX.Y.Z` comment. Never use a floating tag or branch reference. When updating a workflow reference, update both the SHA and the comment.
-
-## Security tools config
-
-- **`.gitleaks.toml`** — extends the default ruleset, no custom rules.
-- **`kics.config`** — excludes two KICS query IDs (known false positives for this repo).
-- **`.markdownlint.yml`** — disables MD013 (line length) and MD060 (table column style) for auto-generated tables.
