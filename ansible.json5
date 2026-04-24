@@ -11,49 +11,5 @@
       ],
       "datasourceTemplate": "github-releases"
     }
-  ],
-  "packageRules": [
-    // Ansible Galaxy - Patch and Minor
-    {
-      "matchManagers": ["ansible-galaxy"],
-      "matchUpdateTypes": ["patch", "minor"],
-      "labels": ["ansible-galaxy"],
-      "groupName": "Ansible Galaxy (non-major)",
-      "commitMessagePrefix": "chore(ansible-galaxy):"
-    },
-    // Ansible Galaxy - Major
-    {
-      "matchManagers": ["ansible-galaxy"],
-      "matchUpdateTypes": ["major"],
-      "labels": ["ansible-galaxy"],
-      "groupName": "Ansible Galaxy (major)",
-      "commitMessagePrefix": "chore(ansible-galaxy)!:"
-    },
-    // Ansible vars - Patch and Minor
-    {
-      "matchManagers": ["regex"],
-      "matchUpdateTypes": ["patch", "minor"],
-      "matchDatasources": ["github-releases"],
-      "matchFileNames": [
-        "^ansible\/group_vars\/.*\\.yml",
-        "^vars\\/main\\.yml"
-      ],
-      "labels": ["ansible-vars"],
-      "groupName": "Ansible vars (non-major)",
-      "commitMessagePrefix": "chore(ansible-vars):"
-    },
-    // Ansible vars - Major
-    {
-      "matchManagers": ["regex"],
-      "matchUpdateTypes": ["major"],
-      "matchDatasources": ["github-releases"],
-      "matchFileNames": [
-        "^ansible\/group_vars\/.*\\.yml",
-        "^vars\\/main\\.yml"
-      ],
-      "labels": ["ansible-vars"],
-      "groupName": "Ansible vars (major)",
-      "commitMessagePrefix": "chore(ansible-vars)!:"
-    }
   ]
 }
