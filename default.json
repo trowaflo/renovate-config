@@ -24,6 +24,18 @@
     {
       "matchUpdateTypes": ["major"],
       "addLabels": ["breaking"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "pinDigests": true
+    },
+    {
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "pinDigests": true
+    },
+    {
+      "matchManagers": ["helm-values", "helmv3"],
+      "pinDigests": true
     }
   ],
   "timezone": "Europe/Paris",

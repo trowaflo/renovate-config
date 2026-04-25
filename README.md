@@ -95,4 +95,4 @@ The default preset enforces a **30 days** minimum release age with strict securi
 > **Note** : Security updates bypass minimumReleaseAge.
 
 ---
-*Documentation auto-generated on Fri Apr 24 20:22:51 UTC 2026*
+*Documentation auto-generated on Sat Apr 25 19:56:49 UTC 2026*
