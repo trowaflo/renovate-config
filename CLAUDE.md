@@ -4,40 +4,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A collection of shared [Renovate](https://docs.renovatebot.com/) configuration presets published as `github>trowaflo/renovate-config`. Other repos consume these presets via `"extends"` in their `renovate.json`.
+A collection of shared [Renovate](https://docs.renovatebot.com/) configuration presets published at `github>trowaflo/renovate-config`. Consumers extend these presets in their own `renovate.json`.
 
-## CI — what runs on PRs
+## Files at a glance
 
-Three workflows trigger on pull requests:
-
-| Workflow | Trigger | What it does |
-|----------|---------|--------------|
-| `validate.yml` | `*.json`, `*.json5` changed | Validates Renovate config syntax via `trowaflo/github-actions` reusable workflow |
-| `quality.yml` | any PR | Runs gitleaks, checkov, actionlint, markdownlint, jsonlint, KICS, trivy |
-| `docs.yml` | `*.json`, `*.json5` changed | Auto-regenerates `README.md` and commits it (`[skip ci]`) |
-
-There is no local lint/test command — CI runs entirely on GitHub Actions via reusable workflows pinned to SHAs.
-
-## File structure and conventions
-
-- **`default.json`** — the root preset consumed by `"extends": ["github>trowaflo/renovate-config"]`. Defines global settings: `minimumReleaseAge: 30 days`, `minimumReleaseAgeBehaviour: timestamp-required`, `internalChecksFilter: strict`, and extends all domain presets.
-- **`*.json5`** — one preset per domain (ansible, ci, docker, git-ops, helm, kubernetes, no_category, renovate). Each defines `packageRules` and/or `customManagers` scoped to its manager(s).
-- **`renovate.json5`** — Renovate config for *this repo itself* (self-hosted), extends `github>trowaflo/renovate-config`.
+| File | Role |
+|------|------|
+| `default.json` | Root preset — global defaults (minimumReleaseAge, schedule, reviewers, commitMessageExtra) |
+| `renovate.json5` | Self-referencing config used to keep this repo's own deps up-to-date |
+| `ansible.json5` | Preset for Ansible Galaxy + regex-based vars files |
+| `ci.json5` | Preset for GitHub Actions |
+| `docker.json5` | Preset for docker-compose |
+| `git-ops.json5` | Preset for GitOps/ArgoCD (OCI + Helm repo custom managers, disables platformAutomerge) |
+| `helm.json5` | Preset for Helm charts (helmv3/helm-values, with `bumpVersion`) |
+| `kubernetes.json5` | Preset for Kubernetes YAML files + regex renovate comments |
+| `no_category.json5` | Preset for pre-commit hooks (ansible-lint, gitleaks) |
 
 ## Preset conventions
 
-Each preset follows the same pattern:
+Every preset follows the same structure: **non-major** (patch + minor) updates are grouped together; **major** updates get a separate group. Commit message prefixes follow Conventional Commits with a scope, e.g. `chore(docker):` / `chore(docker)!:` for breaking. Major PRs automatically get the `breaking` label (set in `default.json`).
 
-1. **Group patch+minor together**, major separately — one `groupName` per update type bucket.
-2. **`commitMessagePrefix`** follows conventional commits: `chore(<scope>):` for non-major, `chore(<scope>)!:` for major.
-3. No auto-merge is configured in any preset.
+## CI workflows (all run on PRs only)
 
-When adding a new preset:
+| Workflow | Trigger | What it does |
+|----------|---------|--------------|
+| `validate.yml` | PR touching `*.json`/`*.json5` | Validates Renovate config via `trowaflo/github-actions` reusable workflow |
+| `quality.yml` | Any PR | Runs gitleaks, checkov, actionlint, markdownlint, jsonlint, kics, trivy |
+| `docs.yml` | PR touching `*.json`/`*.json5` | Auto-generates `README.md` and commits it back to the branch |
 
-- Create `<name>.json5` at the root.
-- Add it to the `"extends"` list in `default.json`.
-- The `docs.yml` workflow will regenerate `README.md` automatically — do not edit `README.md` manually.
+There is **no local lint/test command** — validation runs exclusively in CI. To test a change locally, push to a branch and open a PR.
 
-## Workflow pinning policy
+## Key design decisions
 
-All `uses:` in workflows are pinned to a **full commit SHA** with a `# vX.Y.Z` comment. Never use a floating tag or branch reference. When updating a workflow reference, update both the SHA and the comment.
+- `minimumReleaseAge: "30 days"` with `internalChecksFilter: "strict"` in `default.json` — new releases must be at least 30 days old before Renovate proposes them. Security updates bypass this.
+- `commitMessageExtra` in `default.json` injects the list of upgraded packages into commit titles.
+- `git-ops.json5` sets `platformAutomerge: false` — GitOps repos should not auto-merge.
+- `helm.json5` uses `bumpVersion` to propagate the upstream chart version bump into the chart's own `Chart.yaml`.
+- `kubernetes.json5` includes three regex custom managers to handle `# renovate:` annotation patterns in YAML files (image, value, and version-in-group_vars variants).
+
+## Adding a new preset
+
+1. Create `<name>.json5` at the repo root.
+2. Follow the non-major / major split pattern used by existing presets.
+3. Reference the new preset from `default.json`'s `extends` array if it should apply globally.
+4. The `docs.yml` workflow will regenerate `README.md` automatically when the PR is merged.
