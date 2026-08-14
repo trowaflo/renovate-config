@@ -14,7 +14,7 @@
   ],
   "reviewers": ["trowaflo"],
   "minimumReleaseAge": "30 days",
-  "minimumReleaseAgeBehavior": "timestamp-required",
+  "minimumReleaseAgeBehaviour": "timestamp-required",
   "internalChecksFilter": "strict",
   "commitBodyTable": true,
   "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
