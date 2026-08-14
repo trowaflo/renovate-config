@@ -90,9 +90,10 @@ The default preset enforces a **30 days** minimum release age with strict securi
 | Option | Value |
 |--------|-------|
 | `minimumReleaseAge` | `30 days` |
+| `minimumReleaseAgeBehaviour` | `timestamp-required` |
 | `internalChecksFilter` | `strict` |
 
 > **Note** : Security updates bypass minimumReleaseAge.
 
 ---
-*Documentation auto-generated on Sat Apr 25 19:56:49 UTC 2026*
+*Documentation auto-generated on Fri Aug 14 12:51:34 UTC 2026*
