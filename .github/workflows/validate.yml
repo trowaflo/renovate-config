@@ -9,4 +9,4 @@ permissions: read-all
 
 jobs:
   validate:
-    uses: trowaflo/github-actions/.github/workflows/validate-renovate.yml@0f13bed7ee93c1b8b51ce18fd3a6b9726c22b886 # v3.0.0
+    uses: trowaflo/github-actions/.github/workflows/lint-renovate.yml@745d89e5792c3f9dd0c62e33a1065afd2eadc7a7 # v3.0.0
