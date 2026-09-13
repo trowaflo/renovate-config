@@ -18,7 +18,8 @@
   "minimumReleaseAgeBehaviour": "timestamp-required",
   "internalChecksFilter": "strict",
   "commitBodyTable": true,
-  "commitMessageExtra": "({{#each upgrades}}{{{depName}}} {{{newVersion}}}{{#unless @last}}, {{/unless}}{{/each}})",
+  "commitMessageExtra": "{{#unless isGroup}}({{{depName}}} {{{newVersion}}}){{/unless}}",
+  "prTitleStrict": true,
   "pinDigests": true,
   "rangeStrategy": "pin",
   "packageRules": [
