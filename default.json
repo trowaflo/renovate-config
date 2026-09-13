@@ -4,6 +4,7 @@
     "config:recommended",
     ":dependencyDashboard",
     "mergeConfidence:all-badges",
+    "helpers:pinGitHubActionDigestsToSemver",
     "github>trowaflo/renovate-config:ansible.json5",
     "github>trowaflo/renovate-config:ci.json5",
     "github>trowaflo/renovate-config:docker.json5",
