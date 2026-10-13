@@ -22,7 +22,7 @@ A collection of shared [Renovate](https://docs.renovatebot.com/) configuration p
 
 ## Preset conventions
 
-Every preset follows the same structure: **non-major** (patch + minor) updates are grouped together; **major** updates get a separate group. Commit message prefixes follow Conventional Commits with a scope, e.g. `chore(docker):` / `chore(docker)!:` for breaking. Major PRs automatically get the `breaking` label (set in `default.json`).
+Every preset follows the same structure: **non-major** (patch + minor) updates are grouped together; **major** updates get a separate group. Commit message prefixes follow Conventional Commits with a scope, e.g. `chore(docker):` / `chore(docker)!:` for breaking. Exception: GitHub Actions majors keep `ci(github-actions):` without `!`. A CI action never breaks what the consuming repo ships, and repos versioned by release-please would otherwise cut a major release for it. Major PRs automatically get the `breaking` label (set in `default.json`).
 
 ## CI workflows (all run on PRs only)
 
