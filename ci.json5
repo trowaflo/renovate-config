@@ -8,11 +8,12 @@
       commitMessagePrefix: 'ci(github-actions):'
     },
     {
-      // GitHub Actions - Major (breaking) grouped
+      // GitHub Actions - Major grouped. No "!": a CI action major never breaks
+      // what a repo ships, and release-please would cut a major release for it.
       matchManagers: ['github-actions'],
       matchUpdateTypes: ['major'],
       groupName: 'GitHub Actions (major)',
-      commitMessagePrefix: 'ci(github-actions)!:'
+      commitMessagePrefix: 'ci(github-actions):'
     }
   ]
 }
