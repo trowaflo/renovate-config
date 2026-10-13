@@ -1,13 +1,13 @@
 {
   "platformAutomerge": false,
   "kubernetes": {
-    "fileMatch": ["deployment\\.ya?ml$"]
+    "managerFilePatterns": ["/deployment\\.ya?ml$/"]
   },
   "customManagers": [
     // Helm chart on OCI registry
     {
       "customType": "regex",
-      "fileMatch": ["(^|.*\/)(description\\.yaml)$"],
+      "managerFilePatterns": ["/(^|.*/)(description\\.yaml)$/"],
       "matchStrings": ["ccm:\\s+repoURL:\\s+(?<registryDomain>[^\\s]+)\/+(?<namespace>[^\\s]+)\\s+targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+chart:\\s+(?<chart>[^\\s]+)\\s+type:\\s+oci"],
       "datasourceTemplate": "docker",
       "depNameTemplate": "{{namespace}}/{{chart}}",
@@ -16,7 +16,7 @@
     // Helm chart on Helm repo
     {
       "customType": "regex",
-      "fileMatch": ["(^|.*\/)(description\\.yaml)$"],
+      "managerFilePatterns": ["/(^|.*/)(description\\.yaml)$/"],
       "matchStrings": ["ccm:\\s+repoURL:\\s+(?<registryUrl>[^\\s]+)\\s+targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+chart:\\s+(?<depName>[^\\s]+)\\s+type:\\s+helm"],
       "datasourceTemplate": "helm"
     }
