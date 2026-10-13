@@ -2,9 +2,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^ansible\/group_vars\/.*\\.yml",
-        "^vars\/main\\.yml"
+      "managerFilePatterns": [
+        "/^ansible/group_vars/.*\\.yml/",
+        "/^vars/main\\.yml/"
       ],
       "matchStrings": [
         "repoName:\\s+(?<depName>.*)\\s+tag:\\s+(?<currentValue>.*)"
