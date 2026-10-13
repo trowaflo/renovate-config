@@ -10,6 +10,45 @@
         "repoName:\\s+(?<depName>.*)\\s+tag:\\s+(?<currentValue>.*)"
       ],
       "datasourceTemplate": "github-releases"
+    },
+    {
+      // Git roles pinned as `version: "<sha>"  # <tag>`: the native
+      // ansible-galaxy manager reads the SHA as a version and cannot update it.
+      // github-tags, unlike git-tags, gives the release date that
+      // minimumReleaseAge needs.
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)requirements\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "-\\s+name:\\s+(?<depName>\\S+)\\s+src:\\s+git@github\\.com:(?<packageName>\\S+?)\\.git\\s+scm:\\s+git\\s+version:\\s+\"(?<currentDigest>[0-9a-f]{40})\"\\s+#\\s+(?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "github-tags"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["ansible-galaxy"],
+      "matchCurrentValue": "/^[0-9a-f]{40}$/",
+      "enabled": false
+    },
+    // Ansible roles pinned by SHA - Patch and Minor
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["github-tags"],
+      "matchFileNames": ["**/requirements.yml", "**/requirements.yaml"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "Ansible roles (non-major)",
+      "commitMessagePrefix": "chore(ansible-galaxy):"
+    },
+    // Ansible roles pinned by SHA - Major
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["github-tags"],
+      "matchFileNames": ["**/requirements.yml", "**/requirements.yaml"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Ansible roles (major)",
+      "commitMessagePrefix": "chore(ansible-galaxy)!:"
     }
   ]
 }
