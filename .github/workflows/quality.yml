@@ -7,17 +7,25 @@ on:
 permissions: read-all
 
 jobs:
-  quality:
-    uses: trowaflo/github-actions/.github/workflows/quality.yml@0f13bed7ee93c1b8b51ce18fd3a6b9726c22b886 # v3.0.0
+  lint:
+    uses: trowaflo/github-actions/.github/workflows/lint.yml@745d89e5792c3f9dd0c62e33a1065afd2eadc7a7 # v3.0.0
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: write   # required by nested shellcheck/shfmt jobs (reviewdog inline comments), even when disabled
     with:
-      enable_gitleaks: true
-      enable_checkov: true
       enable_actionlint: true
       enable_markdown_lint: true
       enable_json_lint: true
-      enable_kics: true
-      enable_trivy: true
+
+  security:
+    uses: trowaflo/github-actions/.github/workflows/security.yml@745d89e5792c3f9dd0c62e33a1065afd2eadc7a7 # v3.0.0
     permissions:
-      contents: write
+      contents: read
       pull-requests: write
       security-events: write
+    with:
+      enable_gitleaks: true
+      enable_checkov: true
+      enable_kics: true
+      enable_trivy: true
