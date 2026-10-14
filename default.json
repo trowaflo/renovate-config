@@ -28,6 +28,12 @@
       "addLabels": ["breaking"]
     },
     {
+      "description": "Terraform CLI version stays a range: an exact pin forces every machine onto one patch release. Providers stay pinned by the lock file.",
+      "matchManagers": ["terraform"],
+      "matchDepTypes": ["required_version"],
+      "rangeStrategy": "replace"
+    },
+    {
       "matchManagers": ["github-actions"],
       "pinDigests": true
     },
