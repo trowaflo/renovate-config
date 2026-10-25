@@ -30,7 +30,7 @@ Every preset follows the same structure: **non-major** (patch + minor) updates a
 |----------|---------|--------------|
 | `validate.yml` | PR touching `*.json`/`*.json5` | Validates Renovate config via `trowaflo/github-actions` reusable workflow |
 | `quality.yml` | Any PR | Runs gitleaks, checkov, actionlint, markdownlint, jsonlint, kics, trivy |
-| `docs.yml` | PR touching `*.json`/`*.json5` | Auto-generates `README.md` and commits it back to the branch |
+| `docs.yml` | Any PR | Fails if `README.md` differs from `python3 scripts/readme.py` output |
 
 There is **no local lint/test command** — validation runs exclusively in CI. To test a change locally, push to a branch and open a PR.
 
@@ -47,4 +47,4 @@ There is **no local lint/test command** — validation runs exclusively in CI. T
 1. Create `<name>.json5` at the repo root.
 2. Follow the non-major / major split pattern used by existing presets.
 3. Reference the new preset from `default.json`'s `extends` array if it should apply globally.
-4. The `docs.yml` workflow will regenerate `README.md` automatically when the PR is merged.
+4. Run `python3 scripts/readme.py` and commit `README.md` in the same PR; `docs.yml` fails otherwise.
