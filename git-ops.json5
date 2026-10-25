@@ -10,11 +10,12 @@
     ]
   },
   "customManagers": [
-    // Helm chart on OCI registry
+    // Helm chart on OCI registry. `(?:#[^\n]*\n\s*)*` skips comment lines
+    // between keys (frigate keeps its upstream repoURL commented out).
     {
       "customType": "regex",
       "managerFilePatterns": ["/(^|.*/)(description\\.yaml)$/"],
-      "matchStrings": ["ccm:\\s+repoURL:\\s+(?<registryDomain>[^\\s]+)\/+(?<namespace>[^\\s]+)\\s+targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+chart:\\s+(?<chart>[^\\s]+)\\s+type:\\s+oci"],
+      "matchStrings": ["ccm:\\s+(?:#[^\\n]*\\n\\s*)*repoURL:\\s+(?<registryDomain>[^\\s]+)\/+(?<namespace>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*chart:\\s+(?<chart>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*type:\\s+oci"],
       "datasourceTemplate": "docker",
       "depNameTemplate": "{{namespace}}/{{chart}}",
       "registryUrlTemplate": "https://{{registryDomain}}"
@@ -23,7 +24,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["/(^|.*/)(description\\.yaml)$/"],
-      "matchStrings": ["ccm:\\s+repoURL:\\s+(?<registryUrl>[^\\s]+)\\s+targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+chart:\\s+(?<depName>[^\\s]+)\\s+type:\\s+helm"],
+      "matchStrings": ["ccm:\\s+(?:#[^\\n]*\\n\\s*)*repoURL:\\s+(?<registryUrl>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*chart:\\s+(?<depName>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*type:\\s+helm"],
       "datasourceTemplate": "helm"
     }
   ]
