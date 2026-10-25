@@ -48,7 +48,9 @@ for f in sorted(glob.glob("*.json5")):
     purpose = re.sub(r"\b\w", lambda c: c.group(0).upper(), name.replace("_", " "))
     out.append(f"| {name} | {purpose} | {automerge} rules | {labels} |")
 
-cfg = json.load(open("default.json", encoding="utf-8"))
+# default.json is JSONC (Renovate parses it so): drop `//` comments, except
+# inside strings such as the $schema URL.
+cfg = json.loads(re.sub(r'\s*//[^\n"]*$', "", open("default.json", encoding="utf-8").read(), flags=re.M))
 age = cfg.get("minimumReleaseAge")
 if age:
     out += [

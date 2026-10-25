@@ -4,13 +4,15 @@
     "config:recommended",
     "mergeConfidence:all-badges",
     "helpers:pinGitHubActionDigestsToSemver",
-    "github>trowaflo/renovate-config:ansible.json5",
-    "github>trowaflo/renovate-config:ci.json5",
-    "github>trowaflo/renovate-config:docker.json5",
-    "github>trowaflo/renovate-config:git-ops.json5",
-    "github>trowaflo/renovate-config:helm.json5",
-    "github>trowaflo/renovate-config:kubernetes.json5",
-    "github>trowaflo/renovate-config:no_category.json5"
+    // Sub-presets without a tag resolve from main even when the consumer pins
+    // this preset: release-please rewrites these tags on each release.
+    "github>trowaflo/renovate-config:ansible.json5#v1.0.0", // x-release-please-version
+    "github>trowaflo/renovate-config:ci.json5#v1.0.0", // x-release-please-version
+    "github>trowaflo/renovate-config:docker.json5#v1.0.0", // x-release-please-version
+    "github>trowaflo/renovate-config:git-ops.json5#v1.0.0", // x-release-please-version
+    "github>trowaflo/renovate-config:helm.json5#v1.0.0", // x-release-please-version
+    "github>trowaflo/renovate-config:kubernetes.json5#v1.0.0", // x-release-please-version
+    "github>trowaflo/renovate-config:no_category.json5#v1.0.0" // x-release-please-version
   ],
   "reviewers": ["trowaflo"],
   "minimumReleaseAge": "30 days",

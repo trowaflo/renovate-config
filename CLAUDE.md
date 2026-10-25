@@ -54,5 +54,5 @@ npx --yes renovate-config-validator --strict *.json*
 
 1. Create `<name>.json5` at the repo root.
 2. Follow the non-major / major split pattern used by existing presets.
-3. Reference the new preset from `default.json`'s `extends` array if it should apply globally.
+3. Reference the new preset from `default.json`'s `extends` array if it should apply globally, with the current tag and the release-please marker: `"github>trowaflo/renovate-config:<name>.json5#vX.Y.Z", // x-release-please-version`. Without a tag, Renovate resolves a sub-preset from `main` even for consumers pinned to a release.
 4. Run `python3 scripts/readme.py` and commit `README.md` in the same PR; `docs.yml` fails otherwise.
