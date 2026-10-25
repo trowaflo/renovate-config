@@ -44,7 +44,7 @@ npx --yes renovate-config-validator --strict *.json*
 
 ## Key design decisions
 
-- `minimumReleaseAge: "30 days"` with `internalChecksFilter: "strict"` in `default.json` — new releases must be at least 30 days old before Renovate proposes them. Security updates and `trowaflo/*` packages (actions, presets, charts at `trowaflo.github.io`) bypass this. `timestamp-optional`: a release without a date (some OCI charts) is not held back. Window: before 5am on Monday.
+- `minimumReleaseAge: "30 days"` with `internalChecksFilter: "strict"` in `default.json` — new releases must be at least 30 days old before Renovate proposes them. Security updates and `trowaflo/*` packages (actions, presets, charts at `trowaflo.github.io`) bypass this. `timestamp-optional`: a release without a date (some OCI charts) is not held back. Window: the whole first day of the month, with no hourly PR limit, so one pass opens every pending PR.
 - `commitMessageExtra` in `default.json` injects the list of upgraded packages into commit titles.
 - `git-ops.json5` sets `platformAutomerge: false` — GitOps repos should not auto-merge.
 - `helm.json5` uses `bumpVersion` to propagate the upstream chart version bump into the chart's own `Chart.yaml`.
