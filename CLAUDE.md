@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A collection of shared [Renovate](https://docs.renovatebot.com/) configuration presets published at `github>trowaflo/renovate-config`. Consumers extend these presets in their own `renovate.json`.
+A collection of shared [Renovate](https://docs.renovatebot.com/) configuration presets published at `github>trowaflo/renovate-config`. Consumers extend these presets in their own `renovate.json`, pinned to a release tag (`github>trowaflo/renovate-config#vX.Y.Z`); release-please tags `main` and Renovate proposes each new tag to consumers.
 
 ## Files at a glance
 
@@ -44,7 +44,7 @@ npx --yes renovate-config-validator --strict *.json*
 
 ## Key design decisions
 
-- `minimumReleaseAge: "30 days"` with `internalChecksFilter: "strict"` in `default.json` — new releases must be at least 30 days old before Renovate proposes them. Security updates bypass this.
+- `minimumReleaseAge: "30 days"` with `internalChecksFilter: "strict"` in `default.json` — new releases must be at least 30 days old before Renovate proposes them. Security updates and `trowaflo/*` packages (actions, presets, charts at `trowaflo.github.io`) bypass this. `timestamp-optional`: a release without a date (some OCI charts) is not held back. Window: before 5am on Monday.
 - `commitMessageExtra` in `default.json` injects the list of upgraded packages into commit titles.
 - `git-ops.json5` sets `platformAutomerge: false` — GitOps repos should not auto-merge.
 - `helm.json5` uses `bumpVersion` to propagate the upstream chart version bump into the chart's own `Chart.yaml`.
