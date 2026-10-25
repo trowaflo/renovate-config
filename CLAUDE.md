@@ -29,7 +29,7 @@ Every preset follows the same structure: **non-major** (patch + minor) updates a
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
 | `validate.yml` | PR touching `*.json`/`*.json5` | Validates Renovate config via `trowaflo/github-actions` reusable workflow |
-| `quality.yml` | Any PR | Runs gitleaks, checkov, actionlint, markdownlint, jsonlint, kics, trivy |
+| `quality.yml` | Any PR | Runs gitleaks, checkov, actionlint, markdownlint, kics, trivy (no jsonlint: `default.json` is JSONC) |
 | `docs.yml` | Any PR | Fails if `README.md` differs from `python3 scripts/readme.py` output |
 | `test.yml` | Any PR | Runs the regex fixture tests (`npm test`), required on `main` |
 
