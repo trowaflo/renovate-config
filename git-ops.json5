@@ -1,7 +1,13 @@
 {
   "platformAutomerge": false,
   "kubernetes": {
-    "managerFilePatterns": ["/deployment\\.ya?ml$/"]
+    // Raw manifests live under kustomize/resources/ and infra/.../resources/,
+    // whatever their file name (statefulset, daemonset, cronjob...).
+    "managerFilePatterns": [
+      "/deployment\\.ya?ml$/",
+      "/(^|/)kustomize/resources/.+\\.ya?ml$/",
+      "/^infra/.+/resources/.+\\.ya?ml$/"
+    ]
   },
   "customManagers": [
     // Helm chart on OCI registry
