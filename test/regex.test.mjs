@@ -1,5 +1,6 @@
-// Runs each customManager regex of the presets on real files copied from the
-// consuming repos (test/fixtures/<repo>/<path in that repo>) and compares the
+// Runs each customManager regex of the presets on excerpts of real consumer
+// files (test/fixtures/<repo>/<path in that repo>: the matched lines only, kept
+// verbatim, since this repo is public) and compares the
 // extracted dependencies with test/cases.json. For a native manager, checks
 // only that its managerFilePatterns reach the path.
 // Run: cd test && npm ci && npm test

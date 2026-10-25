@@ -40,7 +40,7 @@ npx --yes renovate-config-validator --strict *.json*
 (cd test && npm ci && npm test)
 ```
 
-`npm test` runs every `customManager` regex on real consumer files copied under `test/fixtures/<repo>/<path>` and compares the result with `test/cases.json`. A regex change comes with its case; refresh a fixture by copying the file again from the consuming repo.
+`npm test` runs every `customManager` regex on excerpts of real consumer files under `test/fixtures/<repo>/<path>` and compares the result with `test/cases.json`. An excerpt keeps only the lines the regex reads, copied verbatim: this repo is public, so never copy a whole consumer file (IPs, secret names, infrastructure layout). A regex change comes with its case.
 
 ## Key design decisions
 
