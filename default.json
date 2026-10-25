@@ -42,8 +42,9 @@
       "pinDigests": true
     },
     {
-      "matchManagers": ["helm-values", "helmv3"],
-      "pinDigests": true
+      "description": "helm-values only knows the tag field and appends the digest to it; charts that reuse the tag as a semver (kube-prometheus-stack) break silently. A repo opts in with its own rule.",
+      "matchManagers": ["helm-values"],
+      "pinDigests": false
     }
   ],
   "timezone": "Europe/Paris",
