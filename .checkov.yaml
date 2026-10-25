@@ -1,0 +1,4 @@
+# test/fixtures holds frozen copies of consumer manifests, used as regex test
+# data and never deployed from here: their findings belong to the source repo.
+skip-path:
+  - test/fixtures
