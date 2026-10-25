@@ -15,7 +15,7 @@
   ],
   "reviewers": ["trowaflo"],
   "minimumReleaseAge": "30 days",
-  "minimumReleaseAgeBehaviour": "timestamp-required",
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
   "internalChecksFilter": "strict",
   "commitBodyTable": true,
   "commitMessageExtra": "{{#unless isGroup}}({{{depName}}} {{{newVersion}}}){{/unless}}",
@@ -34,6 +34,16 @@
       "rangeStrategy": "replace"
     },
     {
+      "description": "In-house actions, presets and charts: no waiting period, the author is the reviewer.",
+      "matchPackageNames": ["trowaflo/**"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "description": "In-house Helm charts, published at trowaflo.github.io.",
+      "matchRegistryUrls": ["https://trowaflo.github.io/**"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
       "matchManagers": ["github-actions"],
       "pinDigests": true
     },
@@ -49,6 +59,6 @@
   ],
   "timezone": "Europe/Paris",
   "schedule": [
-    "before 5am on the first day of the month"
+    "before 5am on monday"
   ]
 }
