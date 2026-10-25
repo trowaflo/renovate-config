@@ -1,0 +1,7 @@
+ccm:
+  repoURL: https://trowaflo.github.io/blakeshome-charts/
+  targetRevision: 7.8.1
+  # repoURL: https://blakeblackshear.github.io/blakeshome-charts/
+  # targetRevision: 7.8.0
+  chart: frigate
+  type: helm

@@ -1,0 +1,15 @@
+      - name: Install helm-unittest
+        # renovate: datasource=github-releases depName=helm-unittest/helm-unittest
+        run: helm plugin list | grep -q unittest || helm plugin install https://github.com/helm-unittest/helm-unittest.git --version v1.0.3 --verify=false
+      - name: Install semver
+        # renovate: datasource=npm depName=semver
+        run: npm install --global semver@7.7.4
+      - run: |
+          # renovate: datasource=github-releases depName=norwoodj/helm-docs
+          VERSION=1.14.2
+      - run: |
+          # renovate: datasource=github-releases depName=norwoodj/helm-docs
+          VERSION=1.14.2
+      - run: |
+          # renovate: datasource=github-releases depName=mikefarah/yq
+          YQ_VERSION="v4.44.2"

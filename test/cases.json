@@ -1,0 +1,114 @@
+[
+  {
+    "why": "N3: raw manifests under kustomize/resources reach the kubernetes manager (zwave-js-ui)",
+    "preset": "git-ops.json5", "manager": "kubernetes",
+    "path": "git-ops/zwave2mqtt/kustomize/resources/statefulset.yaml"
+  },
+  {
+    "why": "N3: generic-device-plugin daemonset",
+    "preset": "git-ops.json5", "manager": "kubernetes",
+    "path": "git-ops/generic-device-plugin/kustomize/resources/daemonset.yaml"
+  },
+  {
+    "why": "N3: postgres and busybox of the authentik backup",
+    "preset": "git-ops.json5", "manager": "kubernetes",
+    "path": "infra/namespace/authentik/kustomize/resources/backup-cronjob.yaml"
+  },
+  {
+    "why": "N6: comment lines between description.yaml keys (frigate)",
+    "preset": "git-ops.json5", "manager": 1,
+    "fixture": "argocd/git-ops/frigate/helm-museum/description.yaml",
+    "deps": [
+      { "registryUrl": "https://trowaflo.github.io/blakeshome-charts/", "currentValue": "7.8.1", "depName": "frigate", "datasource": "helm" }
+    ]
+  },
+  {
+    "why": "N6: the OCI regex does not take a helm-type chart",
+    "preset": "git-ops.json5", "manager": 0,
+    "fixture": "argocd/git-ops/frigate/helm-museum/description.yaml",
+    "deps": []
+  },
+  {
+    "why": "N5: in-house charts pinned in global-values.yaml",
+    "preset": "git-ops.json5", "manager": 2,
+    "fixture": "argocd/infra/argo/global-values.yaml",
+    "deps": [
+      { "registryUrl": "https://trowaflo.github.io/helm-charts", "depName": "kgateway-routing", "currentValue": "0.5.1", "datasource": "helm" },
+      { "registryUrl": "https://trowaflo.github.io/helm-charts", "depName": "persistent-volume", "currentValue": "0.1.0", "datasource": "helm" }
+    ]
+  },
+  {
+    "why": "image annotation (alpine of install-ksops)",
+    "preset": "kubernetes.json5", "manager": 0,
+    "fixture": "argocd/bootstrap/argo-cd/patches/argocd-repo-server.yaml",
+    "deps": [
+      { "datasource": "docker", "depName": "alpine", "currentValue": "3.24" }
+    ]
+  },
+  {
+    "why": "N7: value annotation with and without extractVersion (ksops, kustomize)",
+    "preset": "kubernetes.json5", "manager": 1,
+    "fixture": "argocd/bootstrap/argo-cd/patches/argocd-repo-server.yaml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "viaduct-ai/kustomize-sops", "currentValue": "4.5.1" },
+      { "datasource": "github-releases", "depName": "kubernetes-sigs/kustomize", "extractVersion": "^kustomize/(?<version>.+)$", "currentValue": "5.8.0" }
+    ]
+  },
+  {
+    "why": "N4: VAR: \"x\" (actionlint), pkg==x (yamllint, json5)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/lint.yml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "rhysd/actionlint", "currentValue": "1.7.12" },
+      { "datasource": "pypi", "depName": "yamllint", "currentValue": "1.38.0" },
+      { "datasource": "pypi", "depName": "json5", "currentValue": "0.14.0" }
+    ]
+  },
+  {
+    "why": "N4: --version x, pkg@x, VAR=x, VAR=\"x\"",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/ci-helm.yml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "helm-unittest/helm-unittest", "currentValue": "v1.0.3" },
+      { "datasource": "npm", "depName": "semver", "currentValue": "7.7.4" },
+      { "datasource": "github-releases", "depName": "norwoodj/helm-docs", "currentValue": "1.14.2" },
+      { "datasource": "github-releases", "depName": "norwoodj/helm-docs", "currentValue": "1.14.2" },
+      { "datasource": "github-releases", "depName": "mikefarah/yq", "currentValue": "v4.44.2" }
+    ]
+  },
+  {
+    "why": "N4: pip install pkg==x (ruff)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/ci-python.yml",
+    "deps": [
+      { "datasource": "pypi", "depName": "ruff", "currentValue": "0.15.9" }
+    ]
+  },
+  {
+    "why": "N4: npm install pkg@x (the Renovate validator itself)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/lint-renovate.yml",
+    "deps": [
+      { "datasource": "npm", "depName": "renovate", "currentValue": "43.104.6" }
+    ]
+  },
+  {
+    "why": "N4: VAR=\"x\" (yq)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/release-helm.yml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "mikefarah/yq", "currentValue": "v4.44.2" }
+    ]
+  },
+  {
+    "why": "N4: --version <sha> # <tag>, the form helm-unittest takes once pinned by commit",
+    "preset": "ci.json5", "manager": 1,
+    "inline": {
+      "path": ".github/workflows/ci-helm.yml",
+      "content": "        # renovate: datasource=github-tags depName=helm-unittest/helm-unittest\n        run: helm plugin install https://github.com/helm-unittest/helm-unittest.git --version 0123456789abcdef0123456789abcdef01234567 # v1.0.3\n"
+    },
+    "deps": [
+      { "datasource": "github-tags", "depName": "helm-unittest/helm-unittest", "currentDigest": "0123456789abcdef0123456789abcdef01234567", "currentValue": "v1.0.3" }
+    ]
+  }
+]

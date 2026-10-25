@@ -31,8 +31,16 @@ Every preset follows the same structure: **non-major** (patch + minor) updates a
 | `validate.yml` | PR touching `*.json`/`*.json5` | Validates Renovate config via `trowaflo/github-actions` reusable workflow |
 | `quality.yml` | Any PR | Runs gitleaks, checkov, actionlint, markdownlint, jsonlint, kics, trivy |
 | `docs.yml` | Any PR | Fails if `README.md` differs from `python3 scripts/readme.py` output |
+| `test.yml` | Any PR | Runs the regex fixture tests (`npm test`), required on `main` |
 
-There is **no local lint/test command** — validation runs exclusively in CI. To test a change locally, push to a branch and open a PR.
+Local checks:
+
+```bash
+npx --yes renovate-config-validator --strict *.json*
+(cd test && npm ci && npm test)
+```
+
+`npm test` runs every `customManager` regex on real consumer files copied under `test/fixtures/<repo>/<path>` and compares the result with `test/cases.json`. A regex change comes with its case; refresh a fixture by copying the file again from the consuming repo.
 
 ## Key design decisions
 
