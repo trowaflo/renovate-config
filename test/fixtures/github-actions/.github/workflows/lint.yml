@@ -1,0 +1,10 @@
+    env:
+      # renovate: datasource=github-releases depName=rhysd/actionlint
+      ACTIONLINT_VERSION: "1.7.12"
+    steps:
+      - run: |
+          # renovate: datasource=pypi depName=yamllint
+          pip install --quiet yamllint==1.38.0
+      - run: |
+          # renovate: datasource=pypi depName=json5
+          pip install --quiet json5==0.14.0

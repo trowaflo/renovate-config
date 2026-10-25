@@ -1,0 +1,178 @@
+[
+  {
+    "why": "N3: raw manifests under kustomize/resources reach the kubernetes manager (zwave-js-ui)",
+    "preset": "git-ops.json5", "manager": "kubernetes",
+    "path": "git-ops/zwave2mqtt/kustomize/resources/statefulset.yaml"
+  },
+  {
+    "why": "N3: generic-device-plugin daemonset",
+    "preset": "git-ops.json5", "manager": "kubernetes",
+    "path": "git-ops/generic-device-plugin/kustomize/resources/daemonset.yaml"
+  },
+  {
+    "why": "N3: postgres and busybox of the authentik backup",
+    "preset": "git-ops.json5", "manager": "kubernetes",
+    "path": "infra/namespace/authentik/kustomize/resources/backup-cronjob.yaml"
+  },
+  {
+    "why": "N6: comment lines between description.yaml keys (frigate)",
+    "preset": "git-ops.json5", "manager": 1,
+    "fixture": "argocd/git-ops/frigate/helm-museum/description.yaml",
+    "deps": [
+      { "registryUrl": "https://trowaflo.github.io/blakeshome-charts/", "currentValue": "7.8.1", "depName": "frigate", "datasource": "helm" }
+    ]
+  },
+  {
+    "why": "N6: the OCI regex does not take a helm-type chart",
+    "preset": "git-ops.json5", "manager": 0,
+    "fixture": "argocd/git-ops/frigate/helm-museum/description.yaml",
+    "deps": []
+  },
+  {
+    "why": "N5: in-house charts pinned in global-values.yaml",
+    "preset": "git-ops.json5", "manager": 2,
+    "fixture": "argocd/infra/argo/global-values.yaml",
+    "deps": [
+      { "registryUrl": "https://trowaflo.github.io/helm-charts", "depName": "kgateway-routing", "currentValue": "0.5.1", "datasource": "helm" },
+      { "registryUrl": "https://trowaflo.github.io/helm-charts", "depName": "persistent-volume", "currentValue": "0.1.0", "datasource": "helm" }
+    ]
+  },
+  {
+    "why": "image annotation (alpine of install-ksops)",
+    "preset": "kubernetes.json5", "manager": 0,
+    "fixture": "argocd/bootstrap/argo-cd/patches/argocd-repo-server.yaml",
+    "deps": [
+      { "datasource": "docker", "depName": "alpine", "currentValue": "3.24" }
+    ]
+  },
+  {
+    "why": "N7: value annotation with and without extractVersion (ksops, kustomize)",
+    "preset": "kubernetes.json5", "manager": 1,
+    "fixture": "argocd/bootstrap/argo-cd/patches/argocd-repo-server.yaml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "viaduct-ai/kustomize-sops", "currentValue": "4.5.1" },
+      { "datasource": "github-releases", "depName": "kubernetes-sigs/kustomize", "extractVersion": "^kustomize/(?<version>.+)$", "currentValue": "5.8.0" }
+    ]
+  },
+  {
+    "why": "N4: VAR: \"x\" (actionlint), pkg==x (yamllint, json5)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/lint.yml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "rhysd/actionlint", "currentValue": "1.7.12" },
+      { "datasource": "pypi", "depName": "yamllint", "currentValue": "1.38.0" },
+      { "datasource": "pypi", "depName": "json5", "currentValue": "0.14.0" }
+    ]
+  },
+  {
+    "why": "N4: --version x, pkg@x, VAR=x, VAR=\"x\"",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/ci-helm.yml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "helm-unittest/helm-unittest", "currentValue": "v1.0.3" },
+      { "datasource": "npm", "depName": "semver", "currentValue": "7.7.4" },
+      { "datasource": "github-releases", "depName": "norwoodj/helm-docs", "currentValue": "1.14.2" },
+      { "datasource": "github-releases", "depName": "norwoodj/helm-docs", "currentValue": "1.14.2" },
+      { "datasource": "github-releases", "depName": "mikefarah/yq", "currentValue": "v4.44.2" }
+    ]
+  },
+  {
+    "why": "N4: pip install pkg==x (ruff)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/ci-python.yml",
+    "deps": [
+      { "datasource": "pypi", "depName": "ruff", "currentValue": "0.15.9" }
+    ]
+  },
+  {
+    "why": "N4: npm install pkg@x (the Renovate validator itself)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/lint-renovate.yml",
+    "deps": [
+      { "datasource": "npm", "depName": "renovate", "currentValue": "43.104.6" }
+    ]
+  },
+  {
+    "why": "N4: VAR=\"x\" (yq)",
+    "preset": "ci.json5", "manager": 0,
+    "fixture": "github-actions/.github/workflows/release-helm.yml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "mikefarah/yq", "currentValue": "v4.44.2" }
+    ]
+  },
+  {
+    "why": "N4: --version <sha> # <tag>, the form helm-unittest takes once pinned by commit",
+    "preset": "ci.json5", "manager": 1,
+    "inline": {
+      "path": ".github/workflows/ci-helm.yml",
+      "content": "        # renovate: datasource=github-tags depName=helm-unittest/helm-unittest\n        run: helm plugin install https://github.com/helm-unittest/helm-unittest.git --version 0123456789abcdef0123456789abcdef01234567 # v1.0.3\n"
+    },
+    "deps": [
+      { "datasource": "github-tags", "depName": "helm-unittest/helm-unittest", "currentDigest": "0123456789abcdef0123456789abcdef01234567", "currentValue": "v1.0.3" }
+    ]
+  },
+  {
+    "why": "OCI chart in description.yaml (kgateway)",
+    "preset": "git-ops.json5", "manager": 0,
+    "fixture": "argocd/git-ops/kgateway/helm-museum/description.yaml",
+    "deps": [
+      { "currentValue": "2.3.5", "datasource": "docker", "depName": "charts/kgateway", "registryUrl": "https://cr.kgateway.dev/kgateway-dev" }
+    ]
+  },
+  {
+    "why": "N6: OCI chart with comment lines between keys",
+    "preset": "git-ops.json5", "manager": 0,
+    "inline": {
+      "path": "git-ops/kgateway/helm-museum/description.yaml",
+      "content": "ccm:\n  # upstream registry\n  repoURL: cr.kgateway.dev/kgateway-dev/charts\n  targetRevision: 2.3.5\n  # targetRevision: 2.3.4\n  chart: kgateway\n  type: oci\n"
+    },
+    "deps": [
+      { "currentValue": "2.3.5", "datasource": "docker", "depName": "charts/kgateway", "registryUrl": "https://cr.kgateway.dev/kgateway-dev" }
+    ]
+  },
+  {
+    "why": "version in group_vars, with and without registryUrl (k3s)",
+    "preset": "kubernetes.json5", "manager": 2,
+    "fixture": "k3s/ansible/group_vars/all.yml",
+    "deps": [
+      { "datasource": "github-releases", "depName": "k3s-io/k3s", "currentValue": "v1.35.1+k3s1" },
+      { "datasource": "github-releases", "depName": "kubernetes-sigs/gateway-api", "currentValue": "v1.4.1" },
+      { "datasource": "github-releases", "depName": "argoproj-labs/argocd-autopilot", "currentValue": "v0.4.20" },
+      { "datasource": "github-releases", "depName": "kubernetes-sigs/kustomize", "currentValue": "5.8.0" },
+      { "datasource": "github-releases", "depName": "getsops/sops", "currentValue": "v3.13.3" },
+      { "datasource": "github-releases", "depName": "viaduct-ai/kustomize-sops", "currentValue": "v4.5.1" },
+      { "datasource": "helm", "depName": "cilium", "registryUrl": "https://helm.cilium.io/", "currentValue": "1.19.9" }
+    ]
+  },
+  {
+    "why": "N7: version in group_vars with registryUrl and extractVersion",
+    "preset": "kubernetes.json5", "manager": 2,
+    "inline": {
+      "path": "ansible/group_vars/all.yml",
+      "content": "  # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize registryUrl=https://github.com extractVersion=^kustomize/(?<version>.+)$\n  kustomize:\n    version: \"5.8.0\"\n"
+    },
+    "deps": [
+      { "datasource": "github-releases", "depName": "kubernetes-sigs/kustomize", "registryUrl": "https://github.com", "extractVersion": "^kustomize/(?<version>.+)$", "currentValue": "5.8.0" }
+    ]
+  },
+  {
+    "why": "repoName/tag in ansible group_vars (MyRaspberry)",
+    "preset": "ansible.json5", "manager": 0,
+    "fixture": "MyRaspberry/ansible/group_vars/raspberry.yml",
+    "deps": [
+      { "depName": "prometheus/node_exporter", "currentValue": "v1.12.1", "datasource": "github-releases" },
+      { "depName": "coredns/coredns", "currentValue": "v1.14.7", "datasource": "github-releases" }
+    ]
+  },
+  {
+    "why": "git roles pinned by SHA with a tag comment (MyRaspberry)",
+    "preset": "ansible.json5", "manager": 1,
+    "fixture": "MyRaspberry/requirements.yml",
+    "deps": [
+      { "depName": "storage_management", "packageName": "trowaflo/ansible-role-storage-management", "currentDigest": "bd06c2a2d60045b39f630c02999a654a61aa0753", "currentValue": "v1.0.7", "datasource": "github-tags" },
+      { "depName": "node_exporter_management", "packageName": "trowaflo/ansible-role-node-exporter-management", "currentDigest": "a7b7964e36d0d57e2647c5f4b6096c6d22b5b997", "currentValue": "v1.1.2", "datasource": "github-tags" },
+      { "depName": "package_management", "packageName": "trowaflo/ansible-role-package-management", "currentDigest": "c284c7a89a87eeecab43f047768e4b27407da53c", "currentValue": "v1.2.0", "datasource": "github-tags" },
+      { "depName": "user_management", "packageName": "trowaflo/ansible-role-user-management", "currentDigest": "a5292918bc3ec87ed5295529681f19ee0a1b0037", "currentValue": "v1.2.1", "datasource": "github-tags" }
+    ]
+  }
+]

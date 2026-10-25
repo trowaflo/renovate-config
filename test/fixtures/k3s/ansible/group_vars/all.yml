@@ -1,0 +1,26 @@
+---
+# renovate: datasource=github-releases depName=k3s-io/k3s
+k3s:
+  version: "v1.35.1+k3s1"
+
+# renovate: datasource=github-releases depName=kubernetes-sigs/gateway-api
+gateway_api:
+  version: "v1.4.1"
+
+bootstrap_tools:
+  # renovate: datasource=github-releases depName=argoproj-labs/argocd-autopilot
+  argocd-autopilot:
+    version: "v0.4.20"
+  # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
+  kustomize:
+    version: "5.8.0"
+  # renovate: datasource=github-releases depName=getsops/sops
+  sops:
+    version: "v3.13.3"
+  # renovate: datasource=github-releases depName=viaduct-ai/kustomize-sops
+  ksops:
+    version: "v4.5.1"
+
+# renovate: datasource=helm depName=cilium registryUrl=https://helm.cilium.io/
+cilium:
+  version: "1.19.9"

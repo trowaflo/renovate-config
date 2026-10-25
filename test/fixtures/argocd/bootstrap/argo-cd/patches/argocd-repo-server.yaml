@@ -1,0 +1,11 @@
+      initContainers:
+        - name: install-ksops
+          # renovate: datasource=docker depName=alpine
+          image: alpine:3.24
+          env:
+            # renovate: datasource=github-releases depName=viaduct-ai/kustomize-sops
+            - name: KSOPS_VERSION
+              value: "4.5.1"
+            # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize extractVersion=^kustomize/(?<version>.+)$
+            - name: KUSTOMIZE_VERSION
+              value: "5.8.0"

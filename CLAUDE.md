@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A collection of shared [Renovate](https://docs.renovatebot.com/) configuration presets published at `github>trowaflo/renovate-config`. Consumers extend these presets in their own `renovate.json`.
+A collection of shared [Renovate](https://docs.renovatebot.com/) configuration presets published at `github>trowaflo/renovate-config`. Consumers extend these presets in their own `renovate.json`, pinned to a release tag (`github>trowaflo/renovate-config#vX.Y.Z`); release-please tags `main` and Renovate proposes each new tag to consumers.
 
 ## Files at a glance
 
@@ -29,14 +29,22 @@ Every preset follows the same structure: **non-major** (patch + minor) updates a
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
 | `validate.yml` | PR touching `*.json`/`*.json5` | Validates Renovate config via `trowaflo/github-actions` reusable workflow |
-| `quality.yml` | Any PR | Runs gitleaks, checkov, actionlint, markdownlint, jsonlint, kics, trivy |
-| `docs.yml` | PR touching `*.json`/`*.json5` | Auto-generates `README.md` and commits it back to the branch |
+| `quality.yml` | Any PR | Runs gitleaks, checkov, actionlint, markdownlint, kics, trivy (no jsonlint: `default.json` is JSONC) |
+| `docs.yml` | Any PR | Fails if `README.md` differs from `python3 scripts/readme.py` output |
+| `test.yml` | Any PR | Runs the regex fixture tests (`npm test`), required on `main` |
 
-There is **no local lint/test command** — validation runs exclusively in CI. To test a change locally, push to a branch and open a PR.
+Local checks:
+
+```bash
+npx --yes renovate-config-validator --strict *.json*
+(cd test && npm ci && npm test)
+```
+
+`npm test` runs every `customManager` regex on excerpts of real consumer files under `test/fixtures/<repo>/<path>` and compares the result with `test/cases.json`. An excerpt keeps only the lines the regex reads, copied verbatim: this repo is public, so never copy a whole consumer file (IPs, secret names, infrastructure layout). A regex change comes with its case.
 
 ## Key design decisions
 
-- `minimumReleaseAge: "30 days"` with `internalChecksFilter: "strict"` in `default.json` — new releases must be at least 30 days old before Renovate proposes them. Security updates bypass this.
+- `minimumReleaseAge: "30 days"` with `internalChecksFilter: "strict"` in `default.json` — new releases must be at least 30 days old before Renovate proposes them. Security updates and `trowaflo/*` packages (actions, presets, charts at `trowaflo.github.io`) bypass this. `timestamp-optional`: a release without a date (some OCI charts) is not held back. Window: before 5am on Monday.
 - `commitMessageExtra` in `default.json` injects the list of upgraded packages into commit titles.
 - `git-ops.json5` sets `platformAutomerge: false` — GitOps repos should not auto-merge.
 - `helm.json5` uses `bumpVersion` to propagate the upstream chart version bump into the chart's own `Chart.yaml`.
@@ -46,5 +54,5 @@ There is **no local lint/test command** — validation runs exclusively in CI. T
 
 1. Create `<name>.json5` at the repo root.
 2. Follow the non-major / major split pattern used by existing presets.
-3. Reference the new preset from `default.json`'s `extends` array if it should apply globally.
-4. The `docs.yml` workflow will regenerate `README.md` automatically when the PR is merged.
+3. Reference the new preset from `default.json`'s `extends` array if it should apply globally, with the current tag and the release-please marker: `"github>trowaflo/renovate-config:<name>.json5#vX.Y.Z", // x-release-please-version`. Without a tag, Renovate resolves a sub-preset from `main` even for consumers pinned to a release.
+4. Run `python3 scripts/readme.py` and commit `README.md` in the same PR; `docs.yml` fails otherwise.

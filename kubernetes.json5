@@ -1,11 +1,13 @@
 {
   "customManagers": [
-    // YAML files with # renovate: comments (image pattern)
+    // YAML files with # renovate: comments (image pattern). Each regex accepts
+    // an optional extractVersion= after depName (kustomize tags are
+    // kustomize/vX.Y.Z).
     {
       "customType": "regex",
       "managerFilePatterns": ["/\\.ya?ml$/"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s+?image:\\s*[^:]+:(?<currentValue>[^\\s\"'\\n]+)"
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?:\\s+extractVersion=(?<extractVersion>\\S+))?\\n\\s+?image:\\s*[^:]+:(?<currentValue>[^\\s\"'\\n]+)"
       ]
     },
     // YAML files with # renovate: comments (value pattern)
@@ -13,7 +15,7 @@
       "customType": "regex",
       "managerFilePatterns": ["/\\.ya?ml$/"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n(?:[^\\n]*\\n)?\\s*value:\\s*[\"']?(?<currentValue>[^\"'\\s\\n]+)[\"']?"
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?:\\s+extractVersion=(?<extractVersion>\\S+))?\\n(?:[^\\n]*\\n)?\\s*value:\\s*[\"']?(?<currentValue>[^\"'\\s\\n]+)[\"']?"
       ]
     },
     // YAML files with # renovate: comments (version in group_vars)
@@ -21,7 +23,7 @@
       "customType": "regex",
       "managerFilePatterns": ["/\\.ya?ml$/"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?:\\s+registryUrl=(?<registryUrl>\\S+))?\\n[^:]*:\\n\\s+version: \"(?<currentValue>[v]?[\\d\\.\\+\\-a-zA-Z]+)\""
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?:\\s+registryUrl=(?<registryUrl>\\S+))?(?:\\s+extractVersion=(?<extractVersion>\\S+))?\\n[^:]*:\\n\\s+version: \"(?<currentValue>[v]?[\\d\\.\\+\\-a-zA-Z]+)\""
       ]
     }
   ]

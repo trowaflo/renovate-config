@@ -26,6 +26,13 @@
       "groupName": "Helm (major)",
       "commitMessagePrefix": "chore(helm)!:",
       "bumpVersion": "major"
+    },
+    // One PR per app (package file directory), not one for the whole repo:
+    // a broken image then blocks only its own app.
+    {
+      "matchManagers": ["helmv3", "helm-values"],
+      "additionalBranchPrefix": "{{packageFileDir}}-",
+      "commitMessageSuffix": "({{packageFileDir}})"
     }
   ]
 }

@@ -16,7 +16,11 @@ jobs:
     with:
       enable_actionlint: true
       enable_markdown_lint: true
-      enable_json_lint: true
+      # Off: it parses every *.json as strict JSON, while Renovate reads
+      # default.json as JSONC and its x-release-please-version comments are
+      # required. renovate-config-validator --strict (validate.yml) parses and
+      # checks every preset; the other JSON files fail their own tool if broken.
+      enable_json_lint: false
 
   security:
     uses: trowaflo/github-actions/.github/workflows/security.yml@745d89e5792c3f9dd0c62e33a1065afd2eadc7a7 # v3.0.0

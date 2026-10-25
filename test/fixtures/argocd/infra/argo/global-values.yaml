@@ -1,0 +1,9 @@
+kgatewayRoutingChart:
+  # A comment line between keys, as in the real file.
+  repoURL: https://trowaflo.github.io/helm-charts
+  chart: kgateway-routing
+  targetRevision: 0.5.1
+persistentVolumeChart:
+  repoURL: https://trowaflo.github.io/helm-charts
+  chart: persistent-volume
+  targetRevision: 0.1.0
