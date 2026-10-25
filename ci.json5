@@ -1,4 +1,25 @@
 {
+  customManagers: [
+    {
+      // Tool versions in workflow steps, on the line after `# renovate:`:
+      // `pip install pkg==x`, `npm install pkg@x`, `--version x`,
+      // `VAR=x` (shell) or `VAR: "x"` (env). A dot is required in the version
+      // so a commit SHA after --version falls to the manager below.
+      customType: 'regex',
+      managerFilePatterns: ['/(^|/)\\.github/workflows/.+\\.ya?ml$/', '/(^|/)action\\.ya?ml$/'],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\n[^\\n]*?(?:==|@|--version |\\b[A-Z][A-Z0-9_]*(?:=|:\\s*))["\']?(?<currentValue>v?\\d+\\.[^\\s"\']*)',
+      ],
+    },
+    {
+      // Same, pinned by commit: `--version <sha> ... # <tag>`.
+      customType: 'regex',
+      managerFilePatterns: ['/(^|/)\\.github/workflows/.+\\.ya?ml$/', '/(^|/)action\\.ya?ml$/'],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n[^\\n]*--version (?<currentDigest>[0-9a-f]{40})\\b[^\\n]*# (?<currentValue>v?\\d+\\.\\S*)',
+      ],
+    },
+  ],
   packageRules: [
     {
       // GitHub Actions - Patch and Minor grouped
