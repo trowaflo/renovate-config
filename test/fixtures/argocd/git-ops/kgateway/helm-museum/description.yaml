@@ -1,0 +1,5 @@
+ccm:
+  repoURL: cr.kgateway.dev/kgateway-dev/charts
+  targetRevision: 2.3.5
+  chart: kgateway
+  type: oci

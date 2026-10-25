@@ -1,0 +1,9 @@
+node_exporter_management:
+  scm:
+    repoName: prometheus/node_exporter
+    tag: v1.12.1
+
+coredns_binary:
+  scm:
+    repoName: coredns/coredns
+    tag: v1.14.7

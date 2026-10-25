@@ -1,0 +1,17 @@
+roles:
+  - name: storage_management
+    src: git@github.com:trowaflo/ansible-role-storage-management.git
+    scm: git
+    version: "bd06c2a2d60045b39f630c02999a654a61aa0753"  # v1.0.7
+  - name: node_exporter_management
+    src: git@github.com:trowaflo/ansible-role-node-exporter-management.git
+    scm: git
+    version: "a7b7964e36d0d57e2647c5f4b6096c6d22b5b997"  # v1.1.2
+  - name: package_management
+    src: git@github.com:trowaflo/ansible-role-package-management.git
+    scm: git
+    version: "c284c7a89a87eeecab43f047768e4b27407da53c"  # v1.2.0
+  - name: user_management
+    src: git@github.com:trowaflo/ansible-role-user-management.git
+    scm: git
+    version: "a5292918bc3ec87ed5295529681f19ee0a1b0037"  # v1.2.1

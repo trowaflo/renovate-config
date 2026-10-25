@@ -3,7 +3,7 @@
 // extracted dependencies with test/cases.json. For a native manager, checks
 // only that its managerFilePatterns reach the path.
 // Run: cd test && npm ci && npm test
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import JSON5 from 'json5';
@@ -50,3 +50,15 @@ for (const c of cases) {
     assert.deepEqual(deps, c.deps);
   });
 }
+
+// A regex without a case extracting something could match nothing and still pass.
+test('every customManager has a case with extracted dependencies', () => {
+  const presets = readdirSync(new URL('.', root)).filter((f) => /\.json5?$/.test(f));
+  const missing = [];
+  for (const p of presets) {
+    (JSON5.parse(read(p)).customManagers ?? []).forEach((_, i) => {
+      if (!cases.some((c) => c.preset === p && c.manager === i && c.deps?.length)) missing.push(`${p}#${i}`);
+    });
+  }
+  assert.deepEqual(missing, []);
+});
