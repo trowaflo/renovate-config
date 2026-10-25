@@ -1,0 +1,28 @@
+name: Release Please
+
+# Tags vX.Y.Z on main from the Conventional Commits. Consumers pin
+# github>trowaflo/renovate-config#vX.Y.Z, so a preset change reaches them only
+# through a Renovate PR they review.
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    uses: trowaflo/github-actions/.github/workflows/release.yml@6268fe615c62071abe11fc17d0b78c4bbd5f8a52 # v4.0.0
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      enable_release_please: true
+      harden_runner_egress_policy: block
+      release_config_file: .github/release-please-config.json
+      release_manifest_file: .github/.release-please-manifest.json
