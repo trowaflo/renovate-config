@@ -51,7 +51,10 @@
     }
   ],
   "timezone": "Europe/Paris",
+  // One pass a month, all day: a 5-hour window caught at most one app run,
+  // which the default hourly limit capped at 2 PRs.
   "schedule": [
-    "before 5am on monday"
-  ]
+    "on the first day of the month"
+  ],
+  "prHourlyLimit": 0
 }
