@@ -2,7 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    ":dependencyDashboard",
     "mergeConfidence:all-badges",
     "helpers:pinGitHubActionDigestsToSemver",
     "github>trowaflo/renovate-config:ansible.json5",
@@ -42,14 +41,6 @@
       "description": "In-house Helm charts, published at trowaflo.github.io.",
       "matchRegistryUrls": ["https://trowaflo.github.io/**"],
       "minimumReleaseAge": "0 days"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "pinDigests": true
-    },
-    {
-      "matchManagers": ["dockerfile", "docker-compose"],
-      "pinDigests": true
     },
     {
       "description": "helm-values only knows the tag field and appends the digest to it; charts that reuse the tag as a semver (kube-prometheus-stack) break silently. A repo opts in with its own rule.",
