@@ -1,0 +1,4 @@
+# Rules stay in .markdownlint.yml.
+# CHANGELOG.md is written by release-please, whose output breaks MD012 and MD024.
+ignores:
+  - CHANGELOG.md
