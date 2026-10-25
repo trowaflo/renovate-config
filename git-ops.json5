@@ -26,6 +26,14 @@
       "managerFilePatterns": ["/(^|.*/)(description\\.yaml)$/"],
       "matchStrings": ["ccm:\\s+(?:#[^\\n]*\\n\\s*)*repoURL:\\s+(?<registryUrl>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*chart:\\s+(?<depName>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*type:\\s+helm"],
       "datasourceTemplate": "helm"
+    },
+    // In-house charts referenced from an ApplicationSet global-values.yaml
+    // (kgatewayRoutingChart, persistentVolumeChart): repoURL, chart, targetRevision.
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)global-values\\.ya?ml$/"],
+      "matchStrings": ["repoURL:\\s+(?<registryUrl>https?://[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*chart:\\s+(?<depName>[^\\s]+)\\s+(?:#[^\\n]*\\n\\s*)*targetRevision:\\s+(?<currentValue>[^\\s]+)"],
+      "datasourceTemplate": "helm"
     }
   ]
 }
