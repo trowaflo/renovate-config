@@ -8,7 +8,7 @@ permissions: read-all
 
 jobs:
   lint:
-    uses: trowaflo/github-actions/.github/workflows/lint.yml@745d89e5792c3f9dd0c62e33a1065afd2eadc7a7 # v3.0.0
+    uses: trowaflo/github-actions/.github/workflows/lint.yml@c62d1b93d63953495704ff3c980b0ec8414e54f9 # v4.0.1
     permissions:
       contents: read
       security-events: write
@@ -23,7 +23,7 @@ jobs:
       enable_json_lint: false
 
   security:
-    uses: trowaflo/github-actions/.github/workflows/security.yml@745d89e5792c3f9dd0c62e33a1065afd2eadc7a7 # v3.0.0
+    uses: trowaflo/github-actions/.github/workflows/security.yml@c62d1b93d63953495704ff3c980b0ec8414e54f9 # v4.0.1
     permissions:
       contents: read
       pull-requests: write
