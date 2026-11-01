@@ -48,6 +48,13 @@
       "description": "helm-values only knows the tag field and appends the digest to it; charts that reuse the tag as a semver (kube-prometheus-stack) break silently. A repo opts in with its own rule.",
       "matchManagers": ["helm-values"],
       "pinDigests": false
+    },
+    {
+      "description": "The shared workflows repo gets its own weekly PR, apart from third-party actions: callers move together on a release of that repo. Placed after ci.json5, whose github-actions groups would otherwise take it; no automerge.",
+      "matchPackageNames": ["trowaflo/github-actions"],
+      "groupName": "trowaflo/github-actions",
+      "schedule": ["on monday"],
+      "minimumReleaseAge": "0 days"
     }
   ],
   "timezone": "Europe/Paris",
