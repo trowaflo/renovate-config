@@ -9,7 +9,7 @@ permissions: read-all
 
 jobs:
   validate:
-    uses: trowaflo/github-actions/.github/workflows/lint-renovate.yml@745d89e5792c3f9dd0c62e33a1065afd2eadc7a7 # v3.0.0
+    uses: trowaflo/github-actions/.github/workflows/lint-renovate.yml@9c55705cbbca2481656de92c10402a7d27ef61ab # v5.0.0
     with:
       # Sans cet input, le workflow appelé cherche `find . -maxdepth 1 -name '*renovate*'`,
       # donc uniquement `renovate.json5` ici. Les huit presets que ce dépôt publie à
