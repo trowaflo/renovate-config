@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   release:
-    uses: trowaflo/github-actions/.github/workflows/release.yml@6268fe615c62071abe11fc17d0b78c4bbd5f8a52 # v4.0.0
+    uses: trowaflo/github-actions/.github/workflows/release.yml@c62d1b93d63953495704ff3c980b0ec8414e54f9 # v4.0.1
     permissions:
       contents: write
       pull-requests: write
